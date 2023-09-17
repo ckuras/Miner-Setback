@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1w38yy8nyjno"]
+
+[ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Scenes/roguelikeSheet_transparent.png" id="1_xygbe"]
+
+[node name="cart" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xygbe")
+region_enabled = true
+region_rect = Rect2(867, 306, 16, 16)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8m4srbiddos6"]
+
+[ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
+
+[node name="miner" type="Node2D"]
+
+[node name="body" type="Sprite2D" parent="."]
+texture = ExtResource("1_27w7l")
+hframes = 2
+
+[node name="pick" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7, 0)
+texture = ExtResource("1_27w7l")
+hframes = 2
+frame = 1
