@@ -6,13 +6,19 @@ var cart_speed: float = 1.0
 
 var cart_moving: bool = false
 
+func _ready():
+	main_cart.loop = false
+
 func _process(_delta):
-	if main_cart.progress_ratio == 1.0:
-		cart_moving = false
 	if cart_moving:
 		main_cart.progress += cart_speed
+	if main_cart.progress_ratio == 1.0 or main_cart.progress_ratio == 0.0 and cart_moving:
+		cart_moving = false
 
 func _unhandled_input(event):
+	handle_movement_input(event)
+
+func handle_movement_input(event):
 	if event.is_action_pressed("stop") and cart_moving:
 		cart_moving = false
 	elif event.is_action_pressed("forward") and cart_moving:
@@ -25,4 +31,3 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("reverse") and !cart_moving:
 		cart_moving = true
 		cart_speed = abs(cart_speed) * -1
-
