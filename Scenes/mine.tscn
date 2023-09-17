@@ -1,19 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyvfsh1t84upq"]
 
+[ext_resource type="Script" path="res://src/mine.gd" id="1_qbhht"]
 [ext_resource type="PackedScene" uid="uid://b1w38yy8nyjno" path="res://Scenes/cart.tscn" id="2_y6spq"]
 [ext_resource type="Script" path="res://src/track.gd" id="3_q1vds"]
 [ext_resource type="PackedScene" uid="uid://c8m4srbiddos6" path="res://Scenes/miner.tscn" id="3_v6uwb"]
-[ext_resource type="PackedScene" uid="uid://bc1riu1ai83ea" path="res://Scenes/mine_chunk.tscn" id="4_hxo7q"]
 
 [sub_resource type="Curve2D" id="Curve2D_u2ki3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, -56)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 56)
 }
-point_count = 2
+point_count = 1
 
 [node name="mine" type="Node2D"]
+script = ExtResource("1_qbhht")
 
-[node name="mine_chunk" parent="." instance=ExtResource("4_hxo7q")]
+[node name="mine_chunks" type="Node2D" parent="."]
 
 [node name="miner" parent="." instance=ExtResource("3_v6uwb")]
 position = Vector2(40, 8)
