@@ -7,8 +7,8 @@ extends CharacterBody2D
 var movement_delta: float
 
 func _ready():
-	navigation_agent.path_desired_distance = 30.0
-	navigation_agent.target_desired_distance = 30.0
+	navigation_agent.path_desired_distance = 20.0
+	navigation_agent.target_desired_distance = 15.0
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
 func set_movement_target(target_point: Vector2):
@@ -31,4 +31,6 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func _on_navigation_agent_2d_target_reached():
-	print('target reached')
+	pass
+#	print('target reached')
+

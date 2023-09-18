@@ -1,6 +1,7 @@
 extends Path2D
 
 @onready var main_cart = $PathFollow2D
+@export var resource: Node2D
 
 var cart_speed: float = 0.8
 
@@ -40,3 +41,6 @@ func handle_movement_input(event):
 func set_miner_nav():
 	if cart_moving:
 		get_tree().call_group("miner_units", "set_movement_target", main_cart.global_position)
+	else:
+		await get_tree().create_timer(.2).timeout
+		get_tree().call_group("miner_units", "set_movement_target", resource.global_position)
