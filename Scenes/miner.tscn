@@ -3,15 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jduek"]
-radius = 6.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
+radius = 8.0
 
 [node name="miner" type="CharacterBody2D" groups=["miner_units"]]
+collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_ebnv4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
-shape = SubResource("CircleShape2D_jduek")
+shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("1_27w7l")
@@ -25,11 +27,10 @@ hframes = 2
 frame = 1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 12.0
+target_desired_distance = 8.0
 avoidance_enabled = true
-radius = 8.0
-time_horizon_agents = 5.0
-time_horizon_obstacles = 5.0
-max_speed = 20.0
-debug_enabled = true
+radius = 6.0
+max_speed = 200.0
 
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]

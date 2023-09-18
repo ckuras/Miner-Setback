@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1w38yy8nyjno"]
+[gd_scene load_steps=3 format=3 uid="uid://b1w38yy8nyjno"]
 
 [ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Scenes/roguelikeSheet_transparent.png" id="1_xygbe"]
 
-[node name="cart" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig6xm"]
+radius = 6.5
+height = 16.0
+
+[node name="cart" type="CharacterBody2D"]
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ig6xm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xygbe")
@@ -11,3 +19,6 @@ region_rect = Rect2(867, 306, 16, 16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 6.0

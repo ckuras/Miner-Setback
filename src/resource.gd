@@ -1,4 +1,4 @@
-extends Node2D
+class_name MiningResource extends Node2D
 
 signal depleted
 
@@ -12,4 +12,13 @@ func deplete_resource(amount):
 
 
 func _on_area_2d_body_entered(body):
-	print("in mining range ", body)
+	if body is Miner:
+		print("in mining range ", body)
+		var miner: Miner = body
+		miner.mine_resource(self)
+
+
+func _on_area_2d_body_exited(body):if body is Miner:
+		print("in mining range ", body)
+		var miner: Miner = body
+		miner.navigation_agent.radius = 6
