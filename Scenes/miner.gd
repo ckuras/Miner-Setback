@@ -1,16 +1,15 @@
 extends CharacterBody2D
 
-@export var movement_speed: float = 100
+@export var movement_speed: float = 80
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 var movement_delta: float
 
 func _ready():
-#	navigation_agent.path_desired_distance = 40.0
+	navigation_agent.path_desired_distance = 30.0
 	navigation_agent.target_desired_distance = 30.0
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-
 
 func set_movement_target(target_point: Vector2):
 	await get_tree().create_timer(.2).timeout
