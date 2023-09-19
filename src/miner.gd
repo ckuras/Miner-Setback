@@ -31,6 +31,25 @@ func _on_navigation_agent_2d_target_reached():
 	pass
 #	print('target reached')
 
+func find_resources(cart_position: Vector2, mining_range: int):
+	var current_position = global_position
+	var resources = get_tree().get_nodes_in_group("resources")
+	var nearest_resource: Node2D = null
+	var nearest_resource_distance: float
+	for _resource in resources:
+		_resource = _resource as Node2D
+		var cart_distance: float = cart_position.distance_to(_resource.global_position)
+		var distance: float = current_position.distance_to(_resource.global_position)
+		if cart_distance <= mining_range:
+			if nearest_resource == null:
+				nearest_resource = _resource
+				nearest_resource_distance = distance
+			elif distance < nearest_resource_distance:
+				nearest_resource = _resource
+				nearest_resource_distance = distance
+	if nearest_resource != null:
+		set_movement_target(nearest_resource.global_position)
+
 func mine_resource(resource: MiningResource, current_miners: int):
 	if (current_miners > 4):
 		get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 4)

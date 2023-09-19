@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyvfsh1t84upq"]
+[gd_scene load_steps=7 format=3 uid="uid://dyvfsh1t84upq"]
 
 [ext_resource type="Script" path="res://src/mine.gd" id="1_qbhht"]
 [ext_resource type="PackedScene" uid="uid://cg8dr5db6tpfs" path="res://Scenes/Mine Chunks/mine_chunk_start.tscn" id="2_vjds0"]
 [ext_resource type="PackedScene" uid="uid://b1w38yy8nyjno" path="res://Scenes/cart.tscn" id="2_y6spq"]
 [ext_resource type="Script" path="res://src/track.gd" id="3_q1vds"]
 [ext_resource type="PackedScene" uid="uid://c8m4srbiddos6" path="res://Scenes/miner.tscn" id="3_v6uwb"]
-[ext_resource type="PackedScene" uid="uid://fnbl2txir5lm" path="res://Scenes/resource.tscn" id="6_xy4rk"]
 
 [sub_resource type="Curve2D" id="Curve2D_u2ki3"]
 _data = {
@@ -20,10 +19,11 @@ script = ExtResource("1_qbhht")
 
 [node name="mine_chunk_start" parent="mine_chunks" instance=ExtResource("2_vjds0")]
 
-[node name="track" type="Path2D" parent="." node_paths=PackedStringArray("resource", "nav_timer")]
+[node name="resources" type="Node2D" parent="."]
+
+[node name="track" type="Path2D" parent="." node_paths=PackedStringArray("nav_timer")]
 curve = SubResource("Curve2D_u2ki3")
 script = ExtResource("3_q1vds")
-resource = NodePath("../resource")
 nav_timer = NodePath("../Timer")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="track"]
@@ -45,6 +45,3 @@ position = Vector2(-48, 16)
 position = Vector2(64, 40)
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="resource" parent="." instance=ExtResource("6_xy4rk")]
-position = Vector2(48, 25)
