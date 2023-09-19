@@ -44,18 +44,6 @@ position = Vector2(-48, 16)
 [node name="miner4" parent="." instance=ExtResource("3_v6uwb")]
 position = Vector2(64, 40)
 
-[node name="miner5" parent="." instance=ExtResource("3_v6uwb")]
-position = Vector2(40, -8)
-
-[node name="miner6" parent="." instance=ExtResource("3_v6uwb")]
-position = Vector2(-16, 80)
-
-[node name="miner7" parent="." instance=ExtResource("3_v6uwb")]
-position = Vector2(-24, 64)
-
-[node name="miner8" parent="." instance=ExtResource("3_v6uwb")]
-position = Vector2(1, 88)
-
 [node name="Timer" type="Timer" parent="."]
 
 [node name="resource" parent="." instance=ExtResource("6_xy4rk")]

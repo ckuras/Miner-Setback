@@ -1,19 +1,18 @@
 class_name Miner extends CharacterBody2D
 
 @export var movement_speed: float = 80
-
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
+const AVOIDANCE_RADIUS: int = 6
+
 func _ready():
-#	navigation_agent.path_desired_distance = 20.0
-#	navigation_agent.target_desired_distance = 10.0
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
 func set_movement_target(target_point: Vector2):
 	await get_tree().create_timer(.2).timeout
 	navigation_agent.target_position = target_point
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if navigation_agent.is_navigation_finished():
 		return
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
@@ -32,8 +31,16 @@ func _on_navigation_agent_2d_target_reached():
 	pass
 #	print('target reached')
 
-func mine_resource(resource: MiningResource):
-#	if navigation_agent.is_target_reached():
-	navigation_agent.target_position = position
-	navigation_agent.radius = 2
-	print('start mining')
+func mine_resource(resource: MiningResource, current_miners: int):
+	if (current_miners > 4):
+		get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 4)
+	if (current_miners > 8):
+		get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 2)
+	print('start mining ', resource)
+
+func stop_mining():
+	navigation_agent.radius = AVOIDANCE_RADIUS
+
+func set_navigation_avoidance_radius(radius: int):
+	navigation_agent.radius = radius
+	

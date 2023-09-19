@@ -15,10 +15,11 @@ func _on_area_2d_body_entered(body):
 	if body is Miner:
 		print("in mining range ", body)
 		var miner: Miner = body
-		miner.mine_resource(self)
+		var current_miners: int = $Area2D.get_overlapping_bodies().size() - 1
+		miner.mine_resource(self, current_miners)
 
 
 func _on_area_2d_body_exited(body):if body is Miner:
 		print("in mining range ", body)
 		var miner: Miner = body
-		miner.navigation_agent.radius = 6
+		miner.stop_mining()
