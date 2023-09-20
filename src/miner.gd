@@ -5,14 +5,23 @@ class_name Miner extends CharacterBody2D
 
 const AVOIDANCE_RADIUS: int = 6
 
+enum States {FOLLOW, FIND, MINE}
+
+var _state : int = States.FOLLOW
+
 func _ready():
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
-func set_movement_target(target_point: Vector2):
+func set_movement_target(target_point: Vector2, speed: float = 80):
 	await get_tree().create_timer(.2).timeout
+	movement_speed = speed
 	navigation_agent.target_position = target_point
 
 func _physics_process(_delta):
+	if _state == States.FOLLOW or _state == States.FIND:
+		navigate()
+
+func navigate():
 	if navigation_agent.is_navigation_finished():
 		return
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
