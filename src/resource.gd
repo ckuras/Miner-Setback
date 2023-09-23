@@ -2,11 +2,15 @@ class_name MiningResource extends Node2D
 
 signal depleted
 
-var resource_yield: int = 100
+@export var starting_stats: Resource
+@onready var stats: ResourceStats = $Stats
+
+func _ready():
+	stats.initialize(starting_stats)
 
 func deplete_resource(amount):
-	if resource_yield > 0:
-		resource_yield -= amount
+	if stats.resource_yield > 0:
+		stats.resource_yield -= amount
 	else:
 		emit_signal("depleted")
 

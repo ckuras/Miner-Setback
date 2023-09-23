@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://fnbl2txir5lm"]
+[gd_scene load_steps=5 format=3 uid="uid://fnbl2txir5lm"]
 
 [ext_resource type="Script" path="res://src/resource.gd" id="1_e2w58"]
+[ext_resource type="Resource" uid="uid://c5dpi5jwjmpg4" path="res://src/resources/stone.tres" id="2_uqgwy"]
+[ext_resource type="Script" path="res://src/resources/ResourceStats.gd" id="3_qaw0o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3s71"]
 radius = 16.0
 
 [node name="resource" type="Node2D" groups=["resources"]]
 script = ExtResource("1_e2w58")
+starting_stats = ExtResource("2_uqgwy")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("3_qaw0o")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
