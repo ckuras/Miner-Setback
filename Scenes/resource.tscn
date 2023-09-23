@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://fnbl2txir5lm"]
+[gd_scene load_steps=7 format=3 uid="uid://fnbl2txir5lm"]
 
 [ext_resource type="Script" path="res://src/resource.gd" id="1_e2w58"]
 [ext_resource type="Resource" uid="uid://c5dpi5jwjmpg4" path="res://src/resources/stone.tres" id="2_uqgwy"]
 [ext_resource type="Script" path="res://src/resources/ResourceStats.gd" id="3_qaw0o"]
+[ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Scenes/roguelikeSheet_transparent.png" id="4_i3vk0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3s71"]
 radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l47ua"]
+atlas = ExtResource("4_i3vk0")
+region = Rect2(918, 323, 50, 67)
 
 [node name="resource" type="Node2D" groups=["resources"]]
 script = ExtResource("1_e2w58")
@@ -15,13 +20,23 @@ starting_stats = ExtResource("2_uqgwy")
 script = ExtResource("3_qaw0o")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_n3s71")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+visible = false
 vertices = PackedVector2Array(0, -8, 8, 0, 0, 8, -8, 0)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+texture = SubResource("AtlasTexture_l47ua")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

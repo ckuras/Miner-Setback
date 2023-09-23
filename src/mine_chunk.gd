@@ -13,3 +13,4 @@ func initialize_resources(parent: Node2D):
 		var resource_instance: MiningResource = resource_scene.instantiate()
 		resource_instance.position = resource_position + Vector2(8,0)
 		parent.add_child(resource_instance)
+		tile_map.erase_cell(2, cell)

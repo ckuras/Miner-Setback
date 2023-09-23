@@ -1,6 +1,6 @@
-extends Node
+class_name ResourceStats extends Node
 
-class_name ResourceStats
+signal depleted
 
 var resource_yield: int
 

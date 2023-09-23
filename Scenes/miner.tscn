@@ -16,11 +16,17 @@ position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="body" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 texture = ExtResource("1_27w7l")
 hframes = 2
 
 [node name="pick" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(-7, 0)
 texture = ExtResource("1_27w7l")
 hframes = 2

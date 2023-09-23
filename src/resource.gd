@@ -1,14 +1,24 @@
 class_name MiningResource extends Node2D
 
-signal depleted
-
 @export var starting_stats: Resource
 @onready var stats: ResourceStats = $Stats
+@onready var sprite: Sprite2D = $Sprite
+
+var depleted: bool = false
 
 func _ready():
 	stats.initialize(starting_stats)
+	stats.depleted.connect(Callable(self, "_on_depleted"))
+	_set_sprite()
 
-func deplete_resource(amount):
+func _on_depleted():
+	pass
+
+func _set_sprite():
+	randomize()
+	sprite.region_rect = Rect2i(Vector2i((randi_range(0,2) * 17),(randi_range(0,2) * 17)), Vector2i(16,16))
+
+func gather_resource(amount):
 	if stats.resource_yield > 0:
 		stats.resource_yield -= amount
 	else:
