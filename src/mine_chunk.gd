@@ -8,8 +8,6 @@ func initialize_resources(parent: Node2D):
 	var resource_cells = tile_map.get_used_cells_by_id(2, -1, Vector2i(56,21))
 	for cell in resource_cells:
 		var resource_position: Vector2 = to_global(tile_map.map_to_local(cell))
-		print("local position: ", resource_position)
-		print("global position: ", parent.to_global(resource_position))
 		var resource_instance: MiningResource = resource_scene.instantiate()
 		resource_instance.position = resource_position + Vector2(8,0)
 		parent.add_child(resource_instance)
