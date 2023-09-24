@@ -22,6 +22,8 @@ func change_state(new_state: int) -> void:
 	_state = new_state
 	
 	match _state:
+		States.IDLE:
+			animation.play("RESET")
 		States.FOLLOW:
 			animation.play("walk")
 		States.FIND:
@@ -30,24 +32,21 @@ func change_state(new_state: int) -> void:
 			animation.play("mine")
 
 func set_movement_target(target_point: Vector2, speed: float = 80):
-#	await get_tree().create_timer(.2).timeout
 	movement_speed = speed
 	navigation_agent.target_position = target_point
 
 func _physics_process(_delta):
 	match _state:
 		States.IDLE:
-			await get_tree().create_timer(5).timeout
-			change_state(States.FIND)
+			if find_resources(cart_position, 100):
+				change_state(States.FIND)
 		States.FOLLOW:
 			if cart_speed != 0:
 				follow_cart()
-				navigate()
 			else:
-				change_state(States.FIND)
+				change_state(States.IDLE)
 		States.FIND:
 			find_resources(cart_position, 100)
-			print("Target: ", navigation_agent.target_position)
 		States.MINE:
 			pass
 	set_sprite_direction()
@@ -72,8 +71,9 @@ func navigate():
 		_on_velocity_computed(new_velocity)
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
-	velocity = safe_velocity
-	move_and_slide()
+	if _state != States.IDLE:
+		velocity = safe_velocity
+		move_and_slide()
 
 func _on_navigation_agent_2d_target_reached():
 	pass
@@ -83,7 +83,6 @@ func follow_cart():
 	set_movement_target(cart_position, cart_speed)
 
 func find_resources(cart_pos: Vector2, mining_range: int):
-	change_state(States.FIND)
 	var current_position = global_position
 	var resources = get_tree().get_nodes_in_group("resources")
 	var nearest_resource: Node2D = null
@@ -101,6 +100,8 @@ func find_resources(cart_pos: Vector2, mining_range: int):
 				nearest_resource_distance = distance
 	if nearest_resource != null:
 		set_movement_target(nearest_resource.global_position)
+		return true
+	return false
 
 func mine_resource(resource: MiningResource, current_miners: int):
 	change_state(States.MINE)

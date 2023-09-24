@@ -18,7 +18,6 @@ func _process(_delta):
 		get_tree().call_group("miner_units", "change_state", States.FOLLOW)
 	else:
 		get_tree().call_group("miner_units", "set_cart_position_and_speed", main_cart.global_position + Vector2(0, 20 * cart_speed), 0)
-#		get_tree().call_group("miner_units", "change_state", States.FIND)
 #		get_tree().call_group("miner_units", "find_resources", main_cart.global_position, 100)
 	if main_cart.progress_ratio == 1.0 or main_cart.progress_ratio == 0.0 and cart_moving:
 		cart_moving = false
