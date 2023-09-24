@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=9 format=3 uid="uid://rnokj4l08pvh"]
+
+[ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="1_bmxrh"]
+[ext_resource type="Resource" uid="uid://c3bj1kp5mevlm" path="res://src/item/items/stone.tres" id="2_jlf24"]
+[ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="3_11owy"]
+[ext_resource type="Resource" uid="uid://dv8s744e6lpjl" path="res://src/item/items/iron_ore.tres" id="4_v32s7"]
+[ext_resource type="Resource" uid="uid://ca30ovg8u2ood" path="res://src/item/items/iron_pickaxe.tres" id="5_yn34v"]
+
+[sub_resource type="Resource" id="Resource_s6reh"]
+script = ExtResource("3_11owy")
+item_data = ExtResource("2_jlf24")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_80qkg"]
+script = ExtResource("3_11owy")
+item_data = ExtResource("4_v32s7")
+quantity = 4
+
+[sub_resource type="Resource" id="Resource_s2v7p"]
+script = ExtResource("3_11owy")
+item_data = ExtResource("5_yn34v")
+quantity = 2
+
+[resource]
+script = ExtResource("1_bmxrh")
+slot_datas = Array[ExtResource("3_11owy")]([null, SubResource("Resource_s6reh"), null, null, null, null, SubResource("Resource_80qkg"), null, SubResource("Resource_s2v7p"), null, null, null, null, null, null, null, null, null])

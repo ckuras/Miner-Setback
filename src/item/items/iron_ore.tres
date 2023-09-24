@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dv8s744e6lpjl"]
+
+[ext_resource type="Script" path="res://src/item/item_data.gd" id="1_rwta6"]
+[ext_resource type="Texture2D" uid="uid://cqyqlw5irlsvl" path="res://src/item/#2 - Transparent Icons & Drop Shadow.png" id="2_qrcqj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1rhq"]
+atlas = ExtResource("2_qrcqj")
+region = Rect2(32, 640, 32, 32)
+
+[resource]
+script = ExtResource("1_rwta6")
+name = "Iron Ore"
+description = "Can be smelted into iron bars."
+stackable = true
+texture = SubResource("AtlasTexture_x1rhq")

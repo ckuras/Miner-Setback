@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1w38yy8nyjno"]
+[gd_scene load_steps=5 format=3 uid="uid://b1w38yy8nyjno"]
 
-[ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Scenes/roguelikeSheet_transparent.png" id="1_xygbe"]
+[ext_resource type="Script" path="res://src/cart.gd" id="1_gmrxw"]
+[ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Assets/roguelikeSheet_transparent.png" id="1_qtif5"]
+[ext_resource type="PackedScene" uid="uid://c86gvaxbfm47c" path="res://src/inventory/inventory.tscn" id="2_dshvh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig6xm"]
 radius = 6.5
@@ -8,12 +10,13 @@ height = 16.0
 
 [node name="cart" type="CharacterBody2D"]
 motion_mode = 1
+script = ExtResource("1_gmrxw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ig6xm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_xygbe")
+texture = ExtResource("1_qtif5")
 region_enabled = true
 region_rect = Rect2(867, 306, 16, 16)
 
@@ -22,3 +25,22 @@ zoom = Vector2(4, 4)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 6.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CartInventory" parent="UI/InventoryInterface" instance=ExtResource("2_dshvh")]
+layout_mode = 0
+metadata/_edit_use_anchors_ = true

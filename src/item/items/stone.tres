@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c3bj1kp5mevlm"]
+
+[ext_resource type="Script" path="res://src/item/item_data.gd" id="1_r3u00"]
+[ext_resource type="Texture2D" uid="uid://cqyqlw5irlsvl" path="res://src/item/#2 - Transparent Icons & Drop Shadow.png" id="2_sgkaa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k2fu"]
+atlas = ExtResource("2_sgkaa")
+region = Rect2(32, 544, 32, 32)
+
+[resource]
+script = ExtResource("1_r3u00")
+name = "Stone"
+description = "It's a rock... 😭"
+stackable = true
+texture = SubResource("AtlasTexture_6k2fu")

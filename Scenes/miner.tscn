@@ -271,7 +271,7 @@ hframes = 2
 frame = 1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 12.0
+path_desired_distance = 8.0
 target_desired_distance = 8.0
 avoidance_enabled = true
 radius = 6.0
@@ -281,5 +281,3 @@ max_speed = 200.0
 libraries = {
 "": SubResource("AnimationLibrary_08qps")
 }
-
-[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]

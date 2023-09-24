@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=19 format=3 uid="uid://dofjgdh4pj6t8"]
 
-[ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Scenes/roguelikeSheet_transparent.png" id="1_crtin"]
+[ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Assets/roguelikeSheet_transparent.png" id="1_crtin"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_8m4x2"]
 

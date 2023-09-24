@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di6x4mdvysgld"
-path="res://.godot/imported/roguelikeSheet_transparent.png-c4ecbf25048cf1e349fa831532e61202.ctex"
+uid="uid://cqyqlw5irlsvl"
+path="res://.godot/imported/#2 - Transparent Icons & Drop Shadow.png-570454e0e72588f71094b3ee79109101.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/roguelikeSheet_transparent.png"
-dest_files=["res://.godot/imported/roguelikeSheet_transparent.png-c4ecbf25048cf1e349fa831532e61202.ctex"]
+source_file="res://src/item/#2 - Transparent Icons & Drop Shadow.png"
+dest_files=["res://.godot/imported/#2 - Transparent Icons & Drop Shadow.png-570454e0e72588f71094b3ee79109101.ctex"]
 
 [params]
 

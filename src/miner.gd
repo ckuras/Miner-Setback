@@ -71,13 +71,9 @@ func navigate():
 		_on_velocity_computed(new_velocity)
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
-	if _state != States.IDLE:
+	if _state != States.IDLE or _state != States.MINE:
 		velocity = safe_velocity
 		move_and_slide()
-
-func _on_navigation_agent_2d_target_reached():
-	pass
-#	print('target reached')
 
 func follow_cart():
 	set_movement_target(cart_position, cart_speed)
@@ -113,6 +109,7 @@ func mine_resource(resource: MiningResource, current_miners: int):
 
 func stop_mining():
 	navigation_agent.radius = AVOIDANCE_RADIUS
+	change_state(States.IDLE)
 
 func set_navigation_avoidance_radius(radius: int):
 	navigation_agent.radius = radius
