@@ -6,65 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
 radius = 8.0
 
-[sub_resource type="Animation" id="Animation_sujpw"]
-resource_name = "walk"
-length = 0.7
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 2), Vector2(2, -5), Vector2(0, 2), Vector2(-2, -5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("body:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.314159, -0.314159]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("body:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1.2, 1), Vector2(1, 1.2), Vector2(1.2, 1), Vector2(1, 1.2)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("pick:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="Animation" id="Animation_wuai1"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("body:rotation")
+tracks/0/path = NodePath("sprites/body:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -76,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("body:scale")
+tracks/1/path = NodePath("sprites/body:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -88,7 +35,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("body:position")
+tracks/2/path = NodePath("sprites/body:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -100,19 +47,19 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("pick:visible")
+tracks/3/path = NodePath("sprites/pick:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("pick:position")
+tracks/4/path = NodePath("sprites/pick:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -124,26 +71,26 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("pick:scale")
+tracks/5/path = NodePath("sprites/pick:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1.2)]
+"values": [Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("pick:rotation")
+tracks/6/path = NodePath("sprites/pick:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.32664]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_u1arx"]
@@ -153,7 +100,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("pick:visible")
+tracks/0/path = NodePath("sprites/pick:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -165,19 +112,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("body:position")
+tracks/1/path = NodePath("sprites/body:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.65, 0.75),
 "transitions": PackedFloat32Array(1, 0.3, 5),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(5, -7), Vector2(-5, 0)]
+"values": [Vector2(10, 0), Vector2(15, -7), Vector2(5, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("body:rotation")
+tracks/2/path = NodePath("sprites/body:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -189,7 +136,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("body:scale")
+tracks/3/path = NodePath("sprites/body:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -201,38 +148,91 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("pick:position")
+tracks/4/path = NodePath("sprites/pick:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 0.3, 5),
+"transitions": PackedFloat32Array(1, 0.1, 5),
 "update": 0,
-"values": [Vector2(-7, 0), Vector2(22, -18), Vector2(-21, 4)]
+"values": [Vector2(3, 0), Vector2(32, -18), Vector2(-11, 4)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("pick:scale")
+tracks/5/path = NodePath("sprites/pick:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 0.3, 5),
+"transitions": PackedFloat32Array(1, 0.1, 5),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 1.2), Vector2(1.2, 1.2)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("pick:rotation")
+tracks/6/path = NodePath("sprites/pick:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 0.3, 5),
+"transitions": PackedFloat32Array(1, 0.1, 5),
 "update": 0,
 "values": [0.0, 1.32664, -1.32645]
+}
+
+[sub_resource type="Animation" id="Animation_sujpw"]
+resource_name = "walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprites/body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(2, -5), Vector2(0, 2), Vector2(-2, -5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprites/body:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.314159, -0.314159]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprites/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1), Vector2(1, 1.2), Vector2(1.2, 1), Vector2(1, 1.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprites/pick:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08qps"]
@@ -251,27 +251,26 @@ script = ExtResource("1_ebnv4")
 position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_n7ioa")
 
-[node name="body" type="Sprite2D" parent="."]
+[node name="sprites" type="Node2D" parent="."]
+
+[node name="body" type="Sprite2D" parent="sprites"]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 texture = ExtResource("1_27w7l")
 hframes = 2
 
-[node name="pick" type="Sprite2D" parent="."]
-visible = false
+[node name="pick" type="Sprite2D" parent="sprites"]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(-7, 0)
-rotation = 1.32664
-scale = Vector2(1, 1.2)
 texture = ExtResource("1_27w7l")
 hframes = 2
 frame = 1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 12.0
+path_desired_distance = 10.0
 target_desired_distance = 8.0
 avoidance_enabled = true
 radius = 6.0

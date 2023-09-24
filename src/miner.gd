@@ -3,7 +3,7 @@ class_name Miner extends CharacterBody2D
 @export var movement_speed: float = 80
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
-
+@onready var sprites = $sprites
 
 const AVOIDANCE_RADIUS: int = 6
 
@@ -50,8 +50,15 @@ func _physics_process(_delta):
 			print("Target: ", navigation_agent.target_position)
 		States.MINE:
 			pass
-	
+	set_sprite_direction()
 	navigate()
+
+func set_sprite_direction():
+	var angle = global_position.angle_to_point(navigation_agent.target_position)
+	if abs(angle) > PI/2:
+		sprites.scale.x = 1
+	else:
+		sprites.scale.x = -1
 
 func navigate():
 	if navigation_agent.is_navigation_finished():
