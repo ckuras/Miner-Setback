@@ -1,5 +1,8 @@
 extends Node2D
 
+@onready var cart: CharacterBody2D = $track/PathFollow2D/cart
+@onready var inventory_interface = $UI/InventoryInterface
+
 @onready var mine_chunks = $mine_chunks
 @onready var starting_chunk = $mine_chunks/mine_chunk_start
 @onready var resources = $resources
@@ -9,7 +12,7 @@ extends Node2D
 
 const MINE_SIZE: int = 4
 
-func _ready():
+func _ready() -> void:
 	starting_chunk.initialize_resources(resources)
 	for i in MINE_SIZE:
 		var mine_instance: MineChunk = mine_chunk.instantiate()
@@ -17,5 +20,13 @@ func _ready():
 		mine_chunks.add_child(mine_instance)
 		mine_instance.initialize_resources(resources)
 		track.curve.add_point(Vector2(0, i * -160))
+	cart.toggle_inventory.connect(toggle_inventory_interface)
+	inventory_interface.set_cart_inventory_data(cart.inventory_data)
 
-
+func toggle_inventory_interface() -> void:
+	inventory_interface.visible = not inventory_interface.visible
+	
+	if inventory_interface.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

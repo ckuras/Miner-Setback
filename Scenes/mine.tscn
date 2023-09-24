@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyvfsh1t84upq"]
+[gd_scene load_steps=10 format=3 uid="uid://dyvfsh1t84upq"]
 
 [ext_resource type="Script" path="res://src/mine.gd" id="1_qbhht"]
 [ext_resource type="PackedScene" uid="uid://cg8dr5db6tpfs" path="res://Scenes/Mine Chunks/mine_chunk_start.tscn" id="2_vjds0"]
 [ext_resource type="PackedScene" uid="uid://b1w38yy8nyjno" path="res://Scenes/cart.tscn" id="2_y6spq"]
 [ext_resource type="Script" path="res://src/track.gd" id="3_q1vds"]
 [ext_resource type="PackedScene" uid="uid://c8m4srbiddos6" path="res://Scenes/miner.tscn" id="3_v6uwb"]
+[ext_resource type="Resource" uid="uid://rnokj4l08pvh" path="res://test_inv.tres" id="5_ej4ow"]
+[ext_resource type="Script" path="res://src/inventory/inventory_interface.gd" id="7_fg1i8"]
+[ext_resource type="PackedScene" uid="uid://c86gvaxbfm47c" path="res://src/inventory/inventory.tscn" id="7_k3lrk"]
 
 [sub_resource type="Curve2D" id="Curve2D_u2ki3"]
 _data = {
@@ -31,6 +34,7 @@ rotation = -1.5708
 
 [node name="cart" parent="track/PathFollow2D" instance=ExtResource("2_y6spq")]
 rotation = 1.5708
+inventory_data = ExtResource("5_ej4ow")
 
 [node name="miner" parent="." instance=ExtResource("3_v6uwb")]
 
@@ -45,3 +49,24 @@ position = Vector2(64, 40)
 
 [node name="miner5" parent="." instance=ExtResource("3_v6uwb")]
 position = Vector2(-32, 48)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_fg1i8")
+metadata/_edit_use_anchors_ = true
+
+[node name="CartInventory" parent="UI/InventoryInterface" instance=ExtResource("7_k3lrk")]
+layout_mode = 0
+metadata/_edit_use_anchors_ = true
