@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=9 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
-radius = 8.0
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xkvap"]
 
 [sub_resource type="Animation" id="Animation_wuai1"]
 length = 0.001
@@ -249,7 +251,6 @@ motion_mode = 1
 script = ExtResource("1_ebnv4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="sprites" type="Node2D" parent="."]
@@ -260,6 +261,14 @@ z_as_relative = false
 y_sort_enabled = true
 texture = ExtResource("1_27w7l")
 hframes = 2
+
+[node name="InteractArea" type="Area2D" parent="sprites/body"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]
+shape = SubResource("CircleShape2D_xkvap")
+debug_color = Color(0.839216, 0, 0.921569, 0.419608)
 
 [node name="pick" type="Sprite2D" parent="sprites"]
 visible = false
@@ -283,4 +292,4 @@ libraries = {
 "": SubResource("AnimationLibrary_08qps")
 }
 
-[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="input_event" from="sprites/body/InteractArea" to="." method="_on_interact_input_event"]

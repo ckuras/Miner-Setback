@@ -29,10 +29,10 @@ func _ready() -> void:
 func toggle_inventory_interface(external_inventory_owner = null) -> void:
 	inventory_interface.visible = not inventory_interface.visible
 	
-	if inventory_interface.visible:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	else:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+#	if inventory_interface.visible:
+#		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+#	else:
+#		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if external_inventory_owner:
 		inventory_interface.set_external_inventory(external_inventory_owner)

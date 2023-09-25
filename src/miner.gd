@@ -8,6 +8,7 @@ signal toggle_inventory(external_inventory_owner)
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprites = $sprites
+@onready var collision = $CollisionShape2D
 
 const AVOIDANCE_RADIUS: int = 6
 
@@ -126,7 +127,7 @@ func inventory_interact() -> void:
 	toggle_inventory.emit(self)
 
 
-func _on_input_event(viewport, event, shape_idx):
+func _on_interact_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton \
 			and (event.button_index == MOUSE_BUTTON_LEFT \
 			or event.button_index == MOUSE_BUTTON_RIGHT) \
