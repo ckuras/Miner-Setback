@@ -1,7 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=14 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
+[ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
+[ext_resource type="Resource" uid="uid://c3bj1kp5mevlm" path="res://src/item/items/stone.tres" id="3_apjap"]
+[ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="4_c58lp"]
+
+[sub_resource type="Resource" id="Resource_qryk2"]
+script = ExtResource("4_c58lp")
+item_data = ExtResource("3_apjap")
+quantity = 24
+
+[sub_resource type="Resource" id="Resource_5e06i"]
+script = ExtResource("2_ocei1")
+slot_datas = Array[ExtResource("4_c58lp")]([SubResource("Resource_qryk2"), null, null, null])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
 radius = 2.0
@@ -249,6 +261,7 @@ collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_ebnv4")
+inventory_data = SubResource("Resource_5e06i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n7ioa")
@@ -263,7 +276,7 @@ texture = ExtResource("1_27w7l")
 hframes = 2
 
 [node name="InteractArea" type="Area2D" parent="sprites/body"]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]

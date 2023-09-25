@@ -72,6 +72,16 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 0
 metadata/_edit_use_anchors_ = true
 
+[node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("7_k3lrk")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.504687
+anchor_top = 0.608333
+anchor_right = 0.504687
+anchor_bottom = 0.608333
+metadata/_edit_use_anchors_ = true
+
 [node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("9_m3ley")]
 visible = false
 modulate = Color(1, 1, 1, 0.501961)
