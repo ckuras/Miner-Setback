@@ -1,6 +1,10 @@
 class_name Miner extends CharacterBody2D
 
+signal toggle_inventory(external_inventory_owner)
+
 @export var movement_speed: float = 80
+@export var inventory_data: InventoryData
+
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprites = $sprites
@@ -117,3 +121,14 @@ func set_navigation_avoidance_radius(radius: int):
 func set_cart_position_and_speed(_cart_position, _cart_speed):
 	cart_position = _cart_position
 	cart_speed = _cart_speed
+
+func inventory_interact() -> void:
+	toggle_inventory.emit(self)
+
+
+func _on_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton \
+			and (event.button_index == MOUSE_BUTTON_LEFT \
+			or event.button_index == MOUSE_BUTTON_RIGHT) \
+			and event.is_pressed():
+		inventory_interact()

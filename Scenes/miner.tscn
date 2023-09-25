@@ -244,6 +244,7 @@ _data = {
 
 [node name="miner" type="CharacterBody2D" groups=["miner_units"]]
 collision_mask = 0
+input_pickable = true
 motion_mode = 1
 script = ExtResource("1_ebnv4")
 
@@ -281,3 +282,5 @@ max_speed = 200.0
 libraries = {
 "": SubResource("AnimationLibrary_08qps")
 }
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

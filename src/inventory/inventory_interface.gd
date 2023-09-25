@@ -22,9 +22,13 @@ func on_inventory_interact(inventory_data: InventoryData,
 		[_, MOUSE_BUTTON_LEFT]:
 			grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
 		[null, MOUSE_BUTTON_RIGHT]:
-			pass
+			if Input.is_key_pressed(KEY_SHIFT):
+				grabbed_slot_data = inventory_data.grab_split_slot_data(index)
 		[_, MOUSE_BUTTON_RIGHT]:
-			grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
+			if Input.is_key_pressed(KEY_SHIFT) and grabbed_slot_data.quantity > 1:
+				grabbed_slot_data = inventory_data.drop_split_slot_data(grabbed_slot_data, index)
+			else:
+				grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
 	
 	update_grabbed_slot()
 
@@ -34,3 +38,6 @@ func update_grabbed_slot() -> void:
 		grabbed_slot.set_slot_data(grabbed_slot_data)
 	else:
 		grabbed_slot.hide()
+
+func set_external_inventory(external_inventory_owner) -> void:
+	print(external_inventory_owner)

@@ -24,6 +24,12 @@ func create_single_slot_data() -> SlotData:
 	quantity -= 1
 	return new_slot_data
 
+func create_split_slot_data() -> SlotData:
+	var new_slot_data = duplicate()
+	new_slot_data.quantity = quantity / 2
+	quantity = (quantity / 2) + (quantity % 2)
+	return new_slot_data
+
 func set_quantity(value: int) -> void:
 	quantity = value
 	if quantity > 1 and not item_data.stackable:

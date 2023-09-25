@@ -15,6 +15,17 @@ func grab_slot_data(index: int) -> SlotData:
 	else:
 		return null
 
+func grab_split_slot_data(index: int) -> SlotData:
+	var slot_data = slot_datas[index]
+	
+	if slot_data:
+		slot_datas[index] = slot_data.create_split_slot_data() 
+		inventory_updated.emit(self)
+		return slot_data
+	else:
+		return null
+
+
 func drop_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 	var slot_data = slot_datas[index]
 	
@@ -35,6 +46,21 @@ func drop_single_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
 		slot_datas[index] = grabbed_slot_data.create_single_slot_data()
 	elif slot_data.can_merge_with(grabbed_slot_data):
 		slot_data.fully_merge_with(grabbed_slot_data.create_single_slot_data())
+	
+	inventory_updated.emit(self)
+	
+	if grabbed_slot_data.quantity > 0:
+		return grabbed_slot_data
+	else:
+		return null
+
+func drop_split_slot_data(grabbed_slot_data: SlotData, index: int) -> SlotData:
+	var slot_data = slot_datas[index]
+	
+	if not slot_data:
+		slot_datas[index] = grabbed_slot_data.create_split_slot_data()
+	elif slot_data.can_merge_with(grabbed_slot_data):
+		slot_data.fully_merge_with(grabbed_slot_data.create_split_slot_data())
 	
 	inventory_updated.emit(self)
 	
