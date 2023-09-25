@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyvfsh1t84upq"]
+[gd_scene load_steps=11 format=3 uid="uid://dyvfsh1t84upq"]
 
 [ext_resource type="Script" path="res://src/mine.gd" id="1_qbhht"]
 [ext_resource type="PackedScene" uid="uid://cg8dr5db6tpfs" path="res://Scenes/Mine Chunks/mine_chunk_start.tscn" id="2_vjds0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://rnokj4l08pvh" path="res://test_inv.tres" id="5_ej4ow"]
 [ext_resource type="Script" path="res://src/inventory/inventory_interface.gd" id="7_fg1i8"]
 [ext_resource type="PackedScene" uid="uid://c86gvaxbfm47c" path="res://src/inventory/inventory.tscn" id="7_k3lrk"]
+[ext_resource type="PackedScene" uid="uid://b4bsgvaglg3a3" path="res://src/inventory/slot.tscn" id="9_m3ley"]
 
 [sub_resource type="Curve2D" id="Curve2D_u2ki3"]
 _data = {
@@ -70,3 +71,9 @@ metadata/_edit_use_anchors_ = true
 [node name="CartInventory" parent="UI/InventoryInterface" instance=ExtResource("7_k3lrk")]
 layout_mode = 0
 metadata/_edit_use_anchors_ = true
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("9_m3ley")]
+visible = false
+modulate = Color(1, 1, 1, 0.501961)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
