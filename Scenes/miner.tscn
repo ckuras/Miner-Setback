@@ -328,16 +328,16 @@ inventory_data = SubResource("Resource_5e06i")
 shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="sprites" type="Node2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -8)
 
 [node name="body" type="Sprite2D" parent="sprites"]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
+light_mask = 4
 texture = ExtResource("1_27w7l")
 hframes = 2
 
 [node name="InteractArea" type="Area2D" parent="sprites/body"]
-visible = false
 collision_layer = 4
 collision_mask = 0
 
@@ -348,26 +348,27 @@ debug_color = Color(0.839216, 0, 0.921569, 0.419608)
 [node name="PointLight2D" type="PointLight2D" parent="sprites/body"]
 energy = 0.1
 shadow_enabled = true
+shadow_item_cull_mask = 5
 texture = ExtResource("6_j3pcw")
 texture_scale = 0.4
 
 [node name="PointLight2D2" type="PointLight2D" parent="sprites/body"]
 energy = 0.1
-range_item_cull_mask = 2
+range_item_cull_mask = 6
 texture = ExtResource("6_j3pcw")
 texture_scale = 0.4
 
 [node name="pick" type="Sprite2D" parent="sprites"]
 visible = false
+light_mask = 4
 z_index = 1
-z_as_relative = false
-y_sort_enabled = true
 position = Vector2(-7, 0)
 texture = ExtResource("1_27w7l")
 hframes = 2
 frame = 1
 
 [node name="Shadow" type="PointLight2D" parent="sprites"]
+show_behind_parent = true
 position = Vector2(0, 8)
 scale = Vector2(1.2, 0.8)
 energy = 0.5
