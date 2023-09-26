@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1w38yy8nyjno"]
+[gd_scene load_steps=5 format=3 uid="uid://b1w38yy8nyjno"]
 
 [ext_resource type="Script" path="res://src/cart.gd" id="1_gmrxw"]
 [ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Assets/roguelikeSheet_transparent.png" id="1_qtif5"]
+[ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="3_era81"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig6xm"]
 radius = 6.5
@@ -23,4 +24,15 @@ region_rect = Rect2(867, 306, 16, 16)
 zoom = Vector2(4, 4)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -32)
 radius = 6.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("3_era81")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+energy = 0.6
+range_item_cull_mask = 2
+texture = ExtResource("3_era81")

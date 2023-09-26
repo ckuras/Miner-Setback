@@ -7,6 +7,7 @@
 script = ExtResource("1_nqq7i")
 
 [node name="TileMap" type="TileMap" parent="."]
+light_mask = 3
 position = Vector2(8, 0)
 tile_set = ExtResource("1_f4ffa")
 format = 2

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=15 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 [ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
 [ext_resource type="Resource" uid="uid://c3bj1kp5mevlm" path="res://src/item/items/stone.tres" id="3_apjap"]
 [ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="4_c58lp"]
+[ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="6_j3pcw"]
 
 [sub_resource type="Resource" id="Resource_qryk2"]
 script = ExtResource("4_c58lp")
@@ -106,6 +107,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprites/Shadow:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 8)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("sprites/Shadow:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2, 0.8)]
+}
 
 [sub_resource type="Animation" id="Animation_u1arx"]
 resource_name = "mine"
@@ -195,6 +220,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.0, 1.32664, -1.32645]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprites/Shadow:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 8)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("sprites/Shadow:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2, 0.8)]
+}
 
 [sub_resource type="Animation" id="Animation_sujpw"]
 resource_name = "walk"
@@ -248,6 +297,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprites/Shadow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 8)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08qps"]
 _data = {
@@ -276,12 +337,25 @@ texture = ExtResource("1_27w7l")
 hframes = 2
 
 [node name="InteractArea" type="Area2D" parent="sprites/body"]
+visible = false
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]
 shape = SubResource("CircleShape2D_xkvap")
 debug_color = Color(0.839216, 0, 0.921569, 0.419608)
+
+[node name="PointLight2D" type="PointLight2D" parent="sprites/body"]
+energy = 0.1
+shadow_enabled = true
+texture = ExtResource("6_j3pcw")
+texture_scale = 0.4
+
+[node name="PointLight2D2" type="PointLight2D" parent="sprites/body"]
+energy = 0.1
+range_item_cull_mask = 2
+texture = ExtResource("6_j3pcw")
+texture_scale = 0.4
 
 [node name="pick" type="Sprite2D" parent="sprites"]
 visible = false
@@ -292,6 +366,15 @@ position = Vector2(-7, 0)
 texture = ExtResource("1_27w7l")
 hframes = 2
 frame = 1
+
+[node name="Shadow" type="PointLight2D" parent="sprites"]
+position = Vector2(0, 8)
+scale = Vector2(1.2, 0.8)
+energy = 0.5
+blend_mode = 1
+range_item_cull_mask = 2
+texture = ExtResource("6_j3pcw")
+texture_scale = 0.1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 8.0
