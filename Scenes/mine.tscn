@@ -89,3 +89,6 @@ offset_bottom = 64.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.329412, 0.231373, 0.184314, 1)
+
+[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
+[connection signal="visibility_changed" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_visibility_changed"]

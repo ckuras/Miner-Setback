@@ -7,6 +7,9 @@ var external_inventory_owner
 @onready var external_inventory = $ExternalInventory
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 
+var grabbed_inventory: InventoryData
+var grabbed_slot_index: int
+
 func _physics_process(delta):
 	if grabbed_slot.visible:
 		grabbed_slot.global_position = get_global_mouse_position() + Vector2(5, 5)
@@ -22,6 +25,7 @@ func set_external_inventory(_external_inventory_owner) -> void:
 #	inventory_data.inventory_interact.connect(on_inventory_interact)
 	external_inventory.set_inventory_data(inventory_data)
 	
+	external_inventory.position = external_inventory_owner.position * 10
 	external_inventory.show()
 
 func clear_external_inventory() -> void:
@@ -51,6 +55,8 @@ func on_inventory_interact(inventory_data: InventoryData,
 			else:
 				grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
 	
+	grabbed_inventory = inventory_data
+	grabbed_slot_index = index
 	update_grabbed_slot()
 
 func update_grabbed_slot() -> void:
@@ -59,3 +65,21 @@ func update_grabbed_slot() -> void:
 		grabbed_slot.set_slot_data(grabbed_slot_data)
 	else:
 		grabbed_slot.hide()
+
+
+func _on_gui_input(event: InputEvent):
+	if event is InputEventMouseButton \
+			and event.is_pressed() \
+			and grabbed_slot_data:
+		
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				grabbed_inventory.drop_slot_data(grabbed_slot_data, grabbed_slot_index)
+				grabbed_slot_data = null
+
+func _on_visibility_changed():
+	if not visible and grabbed_slot_data:
+		grabbed_inventory.drop_slot_data(grabbed_slot_data, grabbed_slot_index)
+		grabbed_slot_data = null
+		update_grabbed_slot()
+	

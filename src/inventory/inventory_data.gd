@@ -18,7 +18,7 @@ func grab_slot_data(index: int) -> SlotData:
 func grab_split_slot_data(index: int) -> SlotData:
 	var slot_data = slot_datas[index]
 	
-	if slot_data:
+	if slot_data and slot_data.quantity > 1:
 		slot_datas[index] = slot_data.create_split_slot_data() 
 		inventory_updated.emit(self)
 		return slot_data
@@ -73,6 +73,12 @@ func on_slot_clicked(index: int, button: int) -> void:
 	inventory_interact.emit(self, index, button)
 
 func pick_up_slot_data(slot_data: SlotData) -> bool:
+	
+	for index in slot_datas.size():
+		if slot_datas[index] and slot_datas[index].can_fully_merge_with(slot_data):
+			slot_datas[index].fully_merge_with(slot_data)
+			inventory_updated.emit(self)
+			return true
 	
 	for index in slot_datas.size():
 		if not slot_datas[index]:

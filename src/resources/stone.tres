@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="ResourceStats" load_steps=2 format=3 uid="uid://c5dpi5jwjmpg4"]
+[gd_resource type="Resource" script_class="StartingResourceStats" load_steps=3 format=3 uid="uid://c5dpi5jwjmpg4"]
 
+[ext_resource type="Resource" uid="uid://c3bj1kp5mevlm" path="res://src/item/items/stone.tres" id="1_co0il"]
 [ext_resource type="Script" path="res://src/resources/StartingResourceStats.gd" id="1_j581i"]
 
 [resource]
 script = ExtResource("1_j581i")
 name = "Stone"
+item = ExtResource("1_co0il")
 resource_strength = 5
 resource_health = 10
 min_yield = 5

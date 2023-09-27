@@ -1,20 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=12 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 [ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
-[ext_resource type="Resource" uid="uid://c3bj1kp5mevlm" path="res://src/item/items/stone.tres" id="3_apjap"]
-[ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="4_c58lp"]
 [ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="6_j3pcw"]
-
-[sub_resource type="Resource" id="Resource_qryk2"]
-script = ExtResource("4_c58lp")
-item_data = ExtResource("3_apjap")
-quantity = 24
 
 [sub_resource type="Resource" id="Resource_5e06i"]
 script = ExtResource("2_ocei1")
-slot_datas = Array[ExtResource("4_c58lp")]([SubResource("Resource_qryk2"), null, null, null])
+slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
 radius = 2.0
@@ -134,7 +127,6 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_u1arx"]
 resource_name = "mine"
-loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -143,10 +135,10 @@ tracks/0/path = NodePath("sprites/pick:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.176777),
 "update": 1,
-"values": [true]
+"values": [true, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -155,10 +147,10 @@ tracks/1/path = NodePath("sprites/body:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.65, 0.75),
-"transitions": PackedFloat32Array(1, 0.3, 5),
+"times": PackedFloat32Array(0, 0.65, 0.75, 1),
+"transitions": PackedFloat32Array(1, 0.3, 14.6408, 0.176777),
 "update": 0,
-"values": [Vector2(10, 0), Vector2(15, -7), Vector2(5, 0)]
+"values": [Vector2(10, 0), Vector2(15, -7), Vector2(5, 0), Vector2(10, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -167,10 +159,10 @@ tracks/2/path = NodePath("sprites/body:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.65, 0.75),
-"transitions": PackedFloat32Array(1, 0.3, 5),
+"times": PackedFloat32Array(0, 0.65, 0.75, 1),
+"transitions": PackedFloat32Array(1, 0.3, 14.6408, 0.176777),
 "update": 0,
-"values": [0.0, 0.314159, -0.314159]
+"values": [0.0, 0.314159, -0.314159, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -179,10 +171,10 @@ tracks/3/path = NodePath("sprites/body:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.65, 0.75),
-"transitions": PackedFloat32Array(1, 0.3, 5),
+"times": PackedFloat32Array(0, 0.65, 0.75, 1),
+"transitions": PackedFloat32Array(1, 0.3, 14.6408, 0.176777),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.8, 1.5), Vector2(1.5, 0.8)]
+"values": [Vector2(1, 1), Vector2(0.8, 1.5), Vector2(1.5, 0.8), Vector2(1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -191,10 +183,10 @@ tracks/4/path = NodePath("sprites/pick:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 0.1, 5),
+"times": PackedFloat32Array(0, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 0.1, 14.6408, 0.176777),
 "update": 0,
-"values": [Vector2(3, 0), Vector2(32, -18), Vector2(-11, 4)]
+"values": [Vector2(3, 0), Vector2(32, -18), Vector2(-11, 4), Vector2(3, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -203,10 +195,10 @@ tracks/5/path = NodePath("sprites/pick:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 0.1, 5),
+"times": PackedFloat32Array(0, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 0.1, 14.6408, 0.176777),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1.2), Vector2(1.2, 1.2)]
+"values": [Vector2(1, 1), Vector2(1, 1.2), Vector2(1.2, 1.2), Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -215,10 +207,10 @@ tracks/6/path = NodePath("sprites/pick:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 0.1, 5),
+"times": PackedFloat32Array(0, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 0.1, 14.6408, 0.176777),
 "update": 0,
-"values": [0.0, 1.32664, -1.32645]
+"values": [0.0, 1.32664, -1.32645, 0.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -227,10 +219,10 @@ tracks/7/path = NodePath("sprites/Shadow:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.176777),
 "update": 0,
-"values": [Vector2(10, 8)]
+"values": [Vector2(10, 8), Vector2(10, 8)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -239,10 +231,10 @@ tracks/8/path = NodePath("sprites/Shadow:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.176777),
 "update": 0,
-"values": [Vector2(1.2, 0.8)]
+"values": [Vector2(1.2, 0.8), Vector2(1.2, 0.8)]
 }
 
 [sub_resource type="Animation" id="Animation_sujpw"]
@@ -329,11 +321,10 @@ shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="sprites" type="Node2D" parent="."]
 z_index = 1
-y_sort_enabled = true
-position = Vector2(0, -8)
 
 [node name="body" type="Sprite2D" parent="sprites"]
 light_mask = 4
+y_sort_enabled = true
 texture = ExtResource("1_27w7l")
 hframes = 2
 
@@ -342,6 +333,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]
+visible = false
 shape = SubResource("CircleShape2D_xkvap")
 debug_color = Color(0.839216, 0, 0.921569, 0.419608)
 
@@ -378,8 +370,8 @@ texture = ExtResource("6_j3pcw")
 texture_scale = 0.1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 8.0
-target_desired_distance = 8.0
+path_desired_distance = 12.0
+target_desired_distance = 12.0
 avoidance_enabled = true
 radius = 6.0
 max_speed = 200.0
