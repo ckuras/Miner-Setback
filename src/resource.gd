@@ -1,6 +1,6 @@
 class_name MiningResource extends Node2D
 
-signal mined(item: ItemData)
+signal mined(miner: Miner, item: ItemData)
 
 @export var starting_stats: Resource
 
@@ -31,10 +31,13 @@ func mine_resource(miner: Miner):
 	if miner.mining_strength >= stats.resource_strength \
 		and stats.resource_yield > 0:
 		if stats.current_resource_health <= 0:
-			emit_signal("mined", stats.item)
+			emit_signal("mined", miner, stats.item)
+			stats.resource_yield -= 1
+			stats.current_resource_health = stats.max_resource_health
 		else:
 			stats.current_resource_health -= miner.mining_strength
-			emit_signal("mined")
+			print("resource health: ", stats.current_resource_health)
+			emit_signal("mined", miner, null)
 	else:
 		miner.stop_mining(self)
 

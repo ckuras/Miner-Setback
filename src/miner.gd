@@ -116,14 +116,15 @@ func mine_resource(resource: MiningResource, current_miners: int):
 		get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 2)
 	print('start mining ', resource)
 
-func on_resource_mined(item: ItemData):
-#	print("on resource mined")
-	if item:
+func on_resource_mined(miner: Miner, item: ItemData):
+	if item and miner == self:
 		var slot_instance: SlotData = SlotData.new()
 		slot_instance.item_data = item
 		if not inventory_data.pick_up_slot_data(slot_instance):
 			print('inventory full')
 			change_state(States.IDLE)
+		else:
+			print("miner: %s inventory: %s" % [self, inventory_data.slot_datas[0].quantity])
 	animation.play("mine")
 
 func stop_mining(resource: MiningResource):

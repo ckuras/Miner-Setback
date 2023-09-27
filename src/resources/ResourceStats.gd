@@ -23,6 +23,7 @@ func initialize(stats: StartingResourceStats):
 	min_yield = stats.min_yield
 	max_yield = stats.max_yield
 	resource_yield = get_yield()
+	print("Resource [%s], yield [%s]" % [self, resource_yield])
 
 func get_yield():
 	randomize()
