@@ -13,11 +13,12 @@ signal strike_resource(miner: Miner)
 @onready var collision = $CollisionShape2D
 
 const AVOIDANCE_RADIUS: int = 6
+const FOLLOW_OFFSET: int = 32
 
 var cart_position: Vector2 = Vector2(0, 64)
 var cart_speed: float
 
-enum States {IDLE, FOLLOW, FIND, MINE}
+enum States {IDLE, DROP_OFF, FOLLOW, FIND, MINE}
 
 var _state : int = States.IDLE
 
@@ -40,7 +41,7 @@ func change_state(new_state: int) -> void:
 			animation.play("mine")
 
 func set_movement_target(target_point: Vector2, speed: float = 80):
-	movement_speed = speed
+	movement_speed = abs(speed)
 	navigation_agent.target_position = target_point
 
 func _physics_process(_delta):
@@ -48,6 +49,9 @@ func _physics_process(_delta):
 		States.IDLE:
 			if find_resources(cart_position, 100):
 				change_state(States.FIND)
+#		States.DROP_OFF:
+#			if find_resources(cart_position, 100):
+#				change_state(States.FIND)
 		States.FOLLOW:
 			if cart_speed != 0:
 				follow_cart()
@@ -59,6 +63,13 @@ func _physics_process(_delta):
 			pass
 	set_sprite_direction()
 	navigate()
+
+func handle_idle():
+	if inventory_data.is_full():
+		change_state(States.DROP_OFF)
+	else:
+		if find_resources(cart_position, 100):
+			change_state(States.FIND)
 
 func set_sprite_direction():
 	var angle = global_position.angle_to_point(navigation_agent.target_position)
@@ -84,7 +95,7 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 		move_and_slide()
 
 func follow_cart():
-	set_movement_target(cart_position, cart_speed)
+	set_movement_target(cart_position + Vector2(0, FOLLOW_OFFSET * (cart_speed / 100)), cart_speed)
 
 func find_resources(cart_pos: Vector2, mining_range: int):
 	var current_position = global_position
@@ -92,10 +103,10 @@ func find_resources(cart_pos: Vector2, mining_range: int):
 	var nearest_resource: Node2D = null
 	var nearest_resource_distance: float
 	for _resource in resources:
-		_resource = _resource as Node2D
+		_resource = _resource as MiningResource
 		var cart_distance: float = cart_pos.distance_to(_resource.global_position)
 		var distance: float = current_position.distance_to(_resource.global_position)
-		if cart_distance <= mining_range:
+		if cart_distance <= mining_range and _resource.stats.resource_yield > 0:
 			if nearest_resource == null:
 				nearest_resource = _resource
 				nearest_resource_distance = distance
@@ -123,8 +134,6 @@ func on_resource_mined(miner: Miner, item: ItemData):
 		if not inventory_data.pick_up_slot_data(slot_instance):
 			print('inventory full')
 			change_state(States.IDLE)
-		else:
-			print("miner: %s inventory: %s" % [self, inventory_data.slot_datas[0].quantity])
 	animation.play("mine")
 
 func stop_mining(resource: MiningResource):

@@ -1,35 +1,73 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1w38yy8nyjno"]
+[gd_scene load_steps=9 format=3 uid="uid://b1w38yy8nyjno"]
 
 [ext_resource type="Script" path="res://src/cart.gd" id="1_gmrxw"]
 [ext_resource type="Texture2D" uid="uid://di6x4mdvysgld" path="res://Assets/roguelikeSheet_transparent.png" id="1_qtif5"]
 [ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="3_era81"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig6xm"]
-radius = 6.5
-height = 16.0
+radius = 6.0
+height = 20.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ex6h4"]
 polygon = PackedVector2Array(-5, -6, -5, 5, 5, 5, 5, -6)
 
+[sub_resource type="Animation" id="Animation_0ilge"]
+resource_name = "move"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.75, 0.8, 0.85),
+"transitions": PackedFloat32Array(21.1122, 0.153893, 11.3137, 21.1122, 0.153893, 11.3137),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, -1), Vector2(0, 0), Vector2(0, -1), Vector2(0, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_oyovw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n8ue3"]
+_data = {
+"RESET": SubResource("Animation_oyovw"),
+"move": SubResource("Animation_0ilge")
+}
+
 [node name="cart" type="CharacterBody2D"]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_gmrxw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ig6xm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
+z_index = 2
+y_sort_enabled = true
 texture = ExtResource("1_qtif5")
 region_enabled = true
 region_rect = Rect2(867, 306, 16, 16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-position = Vector2(0, -32)
-radius = 6.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.45
@@ -46,3 +84,12 @@ height = 8.0
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ex6h4")
 occluder_light_mask = 4
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -32)
+radius = 8.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n8ue3")
+}

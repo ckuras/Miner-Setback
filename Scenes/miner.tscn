@@ -11,7 +11,7 @@ script = ExtResource("2_ocei1")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
-radius = 2.0
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkvap"]
 
@@ -321,11 +321,10 @@ inventory_data = SubResource("Resource_j374c")
 shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="sprites" type="Node2D" parent="."]
-z_index = 1
+y_sort_enabled = true
 
 [node name="body" type="Sprite2D" parent="sprites"]
 light_mask = 4
-y_sort_enabled = true
 texture = ExtResource("1_27w7l")
 hframes = 2
 
@@ -334,7 +333,6 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]
-visible = false
 shape = SubResource("CircleShape2D_xkvap")
 debug_color = Color(0.839216, 0, 0.921569, 0.419608)
 
