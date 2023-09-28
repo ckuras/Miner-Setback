@@ -318,6 +318,7 @@ script = ExtResource("1_ebnv4")
 inventory_data = SubResource("Resource_j374c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_n7ioa")
 
 [node name="sprites" type="Node2D" parent="."]
@@ -333,6 +334,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]
+visible = false
 shape = SubResource("CircleShape2D_xkvap")
 debug_color = Color(0.839216, 0, 0.921569, 0.419608)
 

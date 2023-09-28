@@ -88,8 +88,14 @@ func pick_up_slot_data(slot_data: SlotData) -> bool:
 	
 	return false
 
-func is_full():
+func is_empty():
 	for index in slot_datas.size():
 		if slot_datas[index]:
 			return false
 	return true
+
+#func is_full():
+#	for index in slot_datas.size():
+#		if !slot_datas[index]:
+#			return false
+#	return true

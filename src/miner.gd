@@ -33,6 +33,8 @@ func change_state(new_state: int) -> void:
 	match _state:
 		States.IDLE:
 			animation.play("RESET")
+		States.DROP_OFF:
+			animation.play("walk")
 		States.FOLLOW:
 			animation.play("walk")
 		States.FIND:
@@ -47,11 +49,9 @@ func set_movement_target(target_point: Vector2, speed: float = 80):
 func _physics_process(_delta):
 	match _state:
 		States.IDLE:
-			if find_resources(cart_position, 100):
-				change_state(States.FIND)
-#		States.DROP_OFF:
-#			if find_resources(cart_position, 100):
-#				change_state(States.FIND)
+			handle_idle()
+		States.DROP_OFF:
+			find_cart()
 		States.FOLLOW:
 			if cart_speed != 0:
 				follow_cart()
@@ -65,11 +65,13 @@ func _physics_process(_delta):
 	navigate()
 
 func handle_idle():
-	if inventory_data.is_full():
+	if not inventory_data.is_empty():
 		change_state(States.DROP_OFF)
 	else:
 		if find_resources(cart_position, 100):
 			change_state(States.FIND)
+		else:
+			change_state(States.IDLE)
 
 func set_sprite_direction():
 	var angle = global_position.angle_to_point(navigation_agent.target_position)
@@ -96,6 +98,9 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 
 func follow_cart():
 	set_movement_target(cart_position + Vector2(0, FOLLOW_OFFSET * (cart_speed / 100)), cart_speed)
+
+func find_cart():
+	set_movement_target(cart_position)
 
 func find_resources(cart_pos: Vector2, mining_range: int):
 	var current_position = global_position

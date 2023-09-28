@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var cart: CharacterBody2D = $track/PathFollow2D/cart
+@onready var cart: Area2D = $track/PathFollow2D/cart
 @onready var inventory_interface = $UI/InventoryInterface
 
 @onready var mine_chunks = $mine_chunks
