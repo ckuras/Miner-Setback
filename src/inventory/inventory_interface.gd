@@ -26,7 +26,8 @@ func set_external_inventory(_external_inventory_owner) -> void:
 	external_inventory.set_inventory_data(inventory_data)
 	
 #	external_inventory.position = external_inventory_owner.global_position * 10
-	external_inventory.show()
+	if not external_inventory.visible:
+		external_inventory.show()
 
 func clear_external_inventory() -> void:
 	if external_inventory_owner:
