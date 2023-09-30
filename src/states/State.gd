@@ -2,6 +2,8 @@
 class_name State
 extends Node
 
+@export var animation: AnimationPlayer
+
 var state_machine = null
 
 func handle_input(_event: InputEvent) -> void:

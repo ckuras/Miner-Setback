@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 [ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
-[ext_resource type="Script" path="res://Scenes/StateMachine.gd" id="5_f6dx4"]
+[ext_resource type="Script" path="res://src/states/StateMachine.gd" id="5_8pibr"]
 [ext_resource type="Script" path="res://src/states/CartFollow.gd" id="6_ej5w1"]
 [ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="6_j3pcw"]
 [ext_resource type="Script" path="res://src/states/Idle.gd" id="7_856tf"]
@@ -383,17 +383,19 @@ libraries = {
 }
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("5_f6dx4")
+script = ExtResource("5_8pibr")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
 script = ExtResource("7_856tf")
 character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
 
-[node name="CartFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent")]
+[node name="CartFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
 script = ExtResource("6_ej5w1")
 character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
 
 [connection signal="input_event" from="sprites/body/InteractArea" to="." method="_on_interact_input_event"]
