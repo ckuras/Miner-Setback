@@ -22,7 +22,7 @@ func _on_body_entered(body):
 		if miner._state == States.DROP_OFF and not miner.inventory_data.is_empty():
 			miner.set_navigation_avoidance_radius(2)
 			await miner.drop_off_resources(inventory_data)
-			miner.change_state(States.IDLE)
+#			miner.change_state(States.IDLE)
 
 
 

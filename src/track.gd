@@ -5,7 +5,7 @@ extends Path2D
 
 var cart_speed: float = 0.8
 
-var cart_moving: bool = false
+var cart_moving: bool = false : set = _set_cart_moving
 
 enum States {IDLE, DROP_OFF, FOLLOW, FIND, MINE}
 
@@ -15,14 +15,7 @@ func _ready():
 func _process(_delta):
 	if cart_moving:
 		cart_progress.progress += cart_speed
-		cart.animation_player.play("move")
 		cart.navigation_obstacle.velocity = Vector2(0, cart_speed)
-		get_tree().call_group("miner_units", "set_cart_position_and_speed", cart_progress.global_position, cart_speed * 100.0)
-		get_tree().call_group("miner_units", "change_state", States.FOLLOW)
-	else:
-		cart.animation_player.play("RESET")
-		get_tree().call_group("miner_units", "set_cart_position_and_speed", cart_progress.global_position, 0)
-#		get_tree().call_group("miner_units", "find_resources", cart_progress.global_position, 100)
 	if cart_progress.progress_ratio == 1.0 or cart_progress.progress_ratio == 0.0 and cart_moving:
 		cart_moving = false
 
@@ -43,3 +36,13 @@ func handle_movement_input(event):
 		cart_moving = true
 		cart_speed = abs(cart_speed) * -1
 
+func _set_cart_moving(value: bool):
+	var previous_cart_moving = cart_moving
+	cart_moving = value
+	if !previous_cart_moving and cart_moving:
+		cart.animation_player.play("move")
+		get_tree().call_group("miner_units", "change_state", "CartFollow", { "target": cart_progress, "cart_speed": cart_speed })
+	elif previous_cart_moving and !cart_moving:
+		cart.animation_player.play("RESET")
+		get_tree().call_group("miner_units", "change_state", "Idle", { "target": cart_progress })
+		

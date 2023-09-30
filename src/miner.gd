@@ -6,6 +6,7 @@ signal toggle_inventory(external_inventory_owner)
 @export var inventory_data: InventoryData
 @export var mining_strength: int = 5
 
+@onready var state_machine: StateMachine = $StateMachine
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprites = $sprites
@@ -21,22 +22,24 @@ enum States {IDLE, DROP_OFF, FOLLOW, FIND, MINE}
 
 var _state : int = States.IDLE
 
-func _ready():
-	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+#func _ready():
+#	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
-func change_state(new_state: int) -> void:
-	var previous_state := _state
-	_state = new_state
-	
-	match _state:
-		States.IDLE:
-			animation.play("RESET")
-		States.DROP_OFF:
-			animation.play("walk")
-		States.FOLLOW:
-			animation.play("walk")
-		States.FIND:
-			animation.play("walk")
+func change_state(new_state: String, msg: Dictionary = {}) -> void:
+	if state_machine.state != get_node(new_state):
+		state_machine.transition_to(new_state, msg)
+#	var previous_state := _state
+#	_state = new_state
+#
+#	match _state:
+#		States.IDLE:
+#			animation.play("RESET")
+#		States.DROP_OFF:
+#			animation.play("walk")
+#		States.FOLLOW:
+#			animation.play("walk")
+#		States.FIND:
+#			animation.play("walk")
 #		States.MINE:
 #			animation.play("mine")
 
@@ -45,34 +48,34 @@ func set_movement_target(target_point: Vector2, speed: float = 80):
 	navigation_agent.target_position = target_point
 
 func _physics_process(_delta):
-	match _state:
-		States.IDLE:
-			handle_idle()
-		States.DROP_OFF:
-			if !inventory_data.is_empty():
-				find_cart()
-			else:
-				change_state(States.IDLE)
-		States.FOLLOW:
-			if cart_speed != 0:
-				follow_cart()
-			else:
-				change_state(States.IDLE)
-		States.FIND:
-			find_resources(cart_position, 100)
-		States.MINE:
-			pass
+#	match _state:
+#		States.IDLE:
+#			handle_idle()
+#		States.DROP_OFF:
+#			if !inventory_data.is_empty():
+#				find_cart()
+#			else:
+#				change_state(States.IDLE)
+#		States.FOLLOW:
+#			if cart_speed != 0:
+#				follow_cart()
+#			else:
+#				change_state(States.IDLE)
+#		States.FIND:
+#			find_resources(cart_position, 100)
+#		States.MINE:
+#			pass
 	set_sprite_direction()
-	navigate()
+#	navigate()
 
-func handle_idle():
-	if not inventory_data.is_empty():
-		change_state(States.DROP_OFF)
-	else:
-		if find_resources(cart_position, 100):
-			change_state(States.FIND)
-		else:
-			pass
+#func handle_idle():
+#	if not inventory_data.is_empty():
+#		change_state(States.DROP_OFF)
+#	else:
+#		if find_resources(cart_position, 100):
+#			change_state(States.FIND)
+#		else:
+#			pass
 
 func set_sprite_direction():
 	var angle = global_position.angle_to_point(navigation_agent.target_position)
@@ -137,11 +140,12 @@ func find_resources(cart_pos: Vector2, mining_range: int):
 	return false
 
 func start_mining(resource: MiningResource, current_miners: int):
+	return
 	if (current_miners > 4):
 		get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 4)
 	if (current_miners > 8):
 		get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 2)
-	change_state(States.MINE)
+#	change_state(States.MINE)
 	mine_resource(resource)
 
 func mine_resource(resource: MiningResource):
@@ -154,15 +158,16 @@ func mine_resource(resource: MiningResource):
 			slot_instance.item_data = item
 			if not inventory_data.pick_up_slot_data(slot_instance):
 				print('inventory full')
-				change_state(States.IDLE)
+#				change_state(States.IDLE)
 			else:
 				await mine_resource(resource)
 		else:
-			change_state(States.IDLE)
+			pass
+#			change_state(States.IDLE)
 
 func stop_mining(resource: MiningResource):
 	navigation_agent.radius = AVOIDANCE_RADIUS
-	change_state(States.IDLE)
+#	change_state(States.IDLE)
 
 func set_navigation_avoidance_radius(radius: int):
 	navigation_agent.radius = radius
