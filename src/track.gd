@@ -44,5 +44,5 @@ func _set_cart_moving(value: bool):
         get_tree().call_group("miner_units", "change_state", "CartFollow", { "target": cart_progress, "cart_speed": cart_speed })
     elif previous_cart_moving and !cart_moving:
         cart.animation_player.play("RESET")
-        get_tree().call_group("miner_units", "change_state", "Find", { "cart": cart_progress })
+        get_tree().call_group("miner_units", "change_state", "Idle", { "cart": cart_progress })
         

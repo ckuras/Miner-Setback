@@ -15,6 +15,10 @@ func enter(_msg := {}) -> void:
         current_miners = _msg.current_miners
         start_mining()
 
+func exit():
+    if miner:
+        miner.navigation_agent.radius = AVOIDANCE_RADIUS
+
 func start_mining():
     if (current_miners > 4):
         get_tree().call_group("miner_units", "set_navigation_avoidance_radius", 4)
@@ -33,9 +37,8 @@ func mine_resource():
             slot_instance.item_data = item
             if not inventory_data.pick_up_slot_data(slot_instance):
                 print('inventory full')
-                state_machine.transition_to("Find")
+                state_machine.transition_to("Idle")
             else:
                 await mine_resource()
         else:
-            pass
-            state_machine.transition_to("Find")
+            state_machine.transition_to("Idle")

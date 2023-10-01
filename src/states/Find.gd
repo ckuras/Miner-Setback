@@ -12,27 +12,5 @@ func enter(_msg := {}) -> void:
         cart = _msg.cart
     else:
         cart = get_tree().get_first_node_in_group('cart')
-    if !find_resources():
+    if !miner.find_resources():
         state_machine.transition_to("Idle", {"target": cart})
-
-
-func find_resources():
-    var current_position = miner.global_position
-    var resources = get_tree().get_nodes_in_group("resources")
-    var nearest_resource: Node2D = null
-    var nearest_resource_distance: float
-    for _resource in resources:
-        _resource = _resource as MiningResource
-        var cart_distance: float = cart.global_position.distance_to(_resource.global_position)
-        var distance: float = current_position.distance_to(_resource.global_position)
-        if cart_distance <= mining_range and _resource.stats.resource_yield > 0:
-            if nearest_resource == null:
-                nearest_resource = _resource
-                nearest_resource_distance = distance
-            elif distance < nearest_resource_distance:
-                nearest_resource = _resource
-                nearest_resource_distance = distance
-    if nearest_resource != null:
-        set_movement_target(nearest_resource.global_position)
-        return true
-    return false

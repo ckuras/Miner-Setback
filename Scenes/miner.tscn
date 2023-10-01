@@ -1,14 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=19 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 [ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
 [ext_resource type="Script" path="res://src/states/StateMachine.gd" id="5_8pibr"]
+[ext_resource type="Script" path="res://src/states/MinerIdle.gd" id="6_83ic7"]
 [ext_resource type="Script" path="res://src/states/CartFollow.gd" id="6_ej5w1"]
 [ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="6_j3pcw"]
-[ext_resource type="Script" path="res://src/states/Idle.gd" id="7_856tf"]
-[ext_resource type="Script" path="res://src/states/Find.gd" id="8_g58uo"]
 [ext_resource type="Script" path="res://src/states/Mine.gd" id="9_asjta"]
+[ext_resource type="Script" path="res://src/states/FindCart.gd" id="9_y5lu7"]
+[ext_resource type="Script" path="res://src/states/Navigation.gd" id="10_iiv2e"]
+[ext_resource type="Script" path="res://src/states/DropOff.gd" id="11_oa56x"]
 
 [sub_resource type="Resource" id="Resource_4nt2x"]
 resource_local_to_scene = true
@@ -391,7 +393,7 @@ script = ExtResource("5_8pibr")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("7_856tf")
+script = ExtResource("6_83ic7")
 character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
 animation = NodePath("../../AnimationPlayer")
@@ -402,15 +404,25 @@ character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
 animation = NodePath("../../AnimationPlayer")
 
-[node name="Find" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "character", "navigation_agent", "animation")]
-script = ExtResource("8_g58uo")
+[node name="Mine" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
+script = ExtResource("9_asjta")
 miner = NodePath("../..")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="FindCart" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
+script = ExtResource("9_y5lu7")
 character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
 animation = NodePath("../../AnimationPlayer")
 
-[node name="Mine" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
-script = ExtResource("9_asjta")
+[node name="Navigation" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
+script = ExtResource("10_iiv2e")
+character = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="DropOff" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
+script = ExtResource("11_oa56x")
 miner = NodePath("../..")
 animation = NodePath("../../AnimationPlayer")
 

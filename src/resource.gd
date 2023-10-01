@@ -16,7 +16,6 @@ func _on_depleted():
 	pass
 
 func _set_sprite():
-	randomize()
 	sprite.region_rect = Rect2i(Vector2i((randi_range(0,2) * 17),(randi_range(0,2) * 17)), Vector2i(16,16))
 
 func gather_resource(miner: Miner):
@@ -34,11 +33,8 @@ func gather_resource(miner: Miner):
 
 func _on_area_2d_body_entered(body):
 	if body is Miner and stats.resource_yield > 0:
-		print("in mining range ", body)
 		var miner: Miner = body
 		var current_miners: int = $Area2D.get_overlapping_bodies().size() - 1
-		# await miner.navigation_agent.navigation_finished
-		
 		await get_tree().create_timer(.5).timeout
 		miner.change_state("Mine", {"resource":self,"current_miners":current_miners})
 
