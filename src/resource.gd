@@ -33,15 +33,10 @@ func gather_resource(miner: Miner):
 		return null
 
 func _on_area_2d_body_entered(body):
-	if body is Miner:
+	if body is Miner and stats.resource_yield > 0:
 		print("in mining range ", body)
 		var miner: Miner = body
 		var current_miners: int = $Area2D.get_overlapping_bodies().size() - 1
-		miner.start_mining(self, current_miners)
+		miner.change_state("Mine", {"resource":self,"current_miners":current_miners})
 
 
-func _on_area_2d_body_exited(body):
-	if body is Miner:
-		print("left mining range ", body)
-		var miner: Miner = body
-		miner.stop_mining(self)

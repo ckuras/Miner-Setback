@@ -11,76 +11,76 @@ var grabbed_inventory: InventoryData
 var grabbed_slot_index: int
 
 func _physics_process(delta):
-	if grabbed_slot.visible:
-		grabbed_slot.global_position = get_global_mouse_position() + Vector2(5, 5)
+    if grabbed_slot.visible:
+        grabbed_slot.global_position = get_global_mouse_position() + Vector2(5, 5)
 
 func set_cart_inventory_data(inventory_data: InventoryData) -> void:
-	inventory_data.inventory_interact.connect(on_inventory_interact)
-	cart_inventory.set_inventory_data(inventory_data)
+    inventory_data.inventory_interact.connect(on_inventory_interact)
+    cart_inventory.set_inventory_data(inventory_data)
 
 func set_external_inventory(_external_inventory_owner) -> void:
-	external_inventory_owner = _external_inventory_owner
-	var inventory_data: InventoryData = external_inventory_owner.inventory_data
-	
-#	inventory_data.inventory_interact.connect(on_inventory_interact)
-	external_inventory.set_inventory_data(inventory_data)
-	
-#	external_inventory.position = external_inventory_owner.global_position * 10
-	if not external_inventory.visible:
-		external_inventory.show()
+    external_inventory_owner = _external_inventory_owner
+    var inventory_data: InventoryData = external_inventory_owner.inventory_data
+    
+#    inventory_data.inventory_interact.connect(on_inventory_interact)
+    external_inventory.set_inventory_data(inventory_data)
+    
+#    external_inventory.position = external_inventory_owner.global_position * 10
+    if not external_inventory.visible:
+        external_inventory.show()
 
 func clear_external_inventory() -> void:
-	if external_inventory_owner:
-		var inventory_data: InventoryData = external_inventory_owner.inventory_data
-		
-#		inventory_data.inventory_interact.disconnect(on_inventory_interact)
-		external_inventory.clear_inventory_data(inventory_data)
-		
-		external_inventory.hide()
-		external_inventory_owner = null
+    if external_inventory_owner:
+        var inventory_data: InventoryData = external_inventory_owner.inventory_data
+        
+#        inventory_data.inventory_interact.disconnect(on_inventory_interact)
+        external_inventory.clear_inventory_data(inventory_data)
+        
+        external_inventory.hide()
+        external_inventory_owner = null
 
 func on_inventory_interact(inventory_data: InventoryData,
-		index: int, button: int) -> void:
-	
-	match [grabbed_slot_data, button]:
-		[null, MOUSE_BUTTON_LEFT]:
-			grabbed_slot_data = inventory_data.grab_slot_data(index)
-		[_, MOUSE_BUTTON_LEFT]:
-			grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
-		[null, MOUSE_BUTTON_RIGHT]:
-			if Input.is_key_pressed(KEY_SHIFT):
-				grabbed_slot_data = inventory_data.grab_split_slot_data(index)
-		[_, MOUSE_BUTTON_RIGHT]:
-			if Input.is_key_pressed(KEY_SHIFT) and grabbed_slot_data.quantity > 1:
-				grabbed_slot_data = inventory_data.drop_split_slot_data(grabbed_slot_data, index)
-			else:
-				grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
-	
-	grabbed_inventory = inventory_data
-	grabbed_slot_index = index
-	update_grabbed_slot()
+        index: int, button: int) -> void:
+    
+    match [grabbed_slot_data, button]:
+        [null, MOUSE_BUTTON_LEFT]:
+            grabbed_slot_data = inventory_data.grab_slot_data(index)
+        [_, MOUSE_BUTTON_LEFT]:
+            grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
+        [null, MOUSE_BUTTON_RIGHT]:
+            if Input.is_key_pressed(KEY_SHIFT):
+                grabbed_slot_data = inventory_data.grab_split_slot_data(index)
+        [_, MOUSE_BUTTON_RIGHT]:
+            if Input.is_key_pressed(KEY_SHIFT) and grabbed_slot_data.quantity > 1:
+                grabbed_slot_data = inventory_data.drop_split_slot_data(grabbed_slot_data, index)
+            else:
+                grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
+    
+    grabbed_inventory = inventory_data
+    grabbed_slot_index = index
+    update_grabbed_slot()
 
 func update_grabbed_slot() -> void:
-	if grabbed_slot_data:
-		grabbed_slot.show()
-		grabbed_slot.set_slot_data(grabbed_slot_data)
-	else:
-		grabbed_slot.hide()
+    if grabbed_slot_data:
+        grabbed_slot.show()
+        grabbed_slot.set_slot_data(grabbed_slot_data)
+    else:
+        grabbed_slot.hide()
 
 
 func _on_gui_input(event: InputEvent):
-	if event is InputEventMouseButton \
-			and event.is_pressed() \
-			and grabbed_slot_data:
-		
-		match event.button_index:
-			MOUSE_BUTTON_LEFT:
-				grabbed_inventory.drop_slot_data(grabbed_slot_data, grabbed_slot_index)
-				grabbed_slot_data = null
+    if event is InputEventMouseButton \
+            and event.is_pressed() \
+            and grabbed_slot_data:
+        
+        match event.button_index:
+            MOUSE_BUTTON_LEFT:
+                grabbed_inventory.drop_slot_data(grabbed_slot_data, grabbed_slot_index)
+                grabbed_slot_data = null
 
 func _on_visibility_changed():
-	if not visible and grabbed_slot_data:
-		grabbed_inventory.drop_slot_data(grabbed_slot_data, grabbed_slot_index)
-		grabbed_slot_data = null
-		update_grabbed_slot()
-	
+    if not visible and grabbed_slot_data:
+        grabbed_inventory.drop_slot_data(grabbed_slot_data, grabbed_slot_index)
+        grabbed_slot_data = null
+        update_grabbed_slot()
+    

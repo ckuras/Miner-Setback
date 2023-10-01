@@ -1,4 +1,4 @@
-class_name CartFollow extends Navigation
+class_name CartFollow extends NavigationState
 
 const FOLLOW_OFFSET: int = 20
 var cart_speed: float

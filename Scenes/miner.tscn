@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=17 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://src/states/CartFollow.gd" id="6_ej5w1"]
 [ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="6_j3pcw"]
 [ext_resource type="Script" path="res://src/states/Idle.gd" id="7_856tf"]
+[ext_resource type="Script" path="res://src/states/Find.gd" id="8_g58uo"]
+[ext_resource type="Script" path="res://src/states/Mine.gd" id="9_asjta"]
 
 [sub_resource type="Resource" id="Resource_4nt2x"]
 resource_local_to_scene = true
@@ -374,6 +376,8 @@ texture = ExtResource("6_j3pcw")
 texture_scale = 0.1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 12.0
+target_desired_distance = 8.0
 avoidance_enabled = true
 radius = 6.0
 
@@ -396,6 +400,18 @@ animation = NodePath("../../AnimationPlayer")
 script = ExtResource("6_ej5w1")
 character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="Find" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "character", "navigation_agent", "animation")]
+script = ExtResource("8_g58uo")
+miner = NodePath("../..")
+character = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="Mine" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
+script = ExtResource("9_asjta")
+miner = NodePath("../..")
 animation = NodePath("../../AnimationPlayer")
 
 [connection signal="input_event" from="sprites/body/InteractArea" to="." method="_on_interact_input_event"]

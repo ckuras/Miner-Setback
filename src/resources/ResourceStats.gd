@@ -15,16 +15,15 @@ var current_resource_health
 
 
 func initialize(stats: StartingResourceStats):
-	resource_name = stats.name
-	item = stats.item
-	resource_strength = stats.resource_strength
-	max_resource_health = stats.max_resource_health
-	current_resource_health = max_resource_health
-	min_yield = stats.min_yield
-	max_yield = stats.max_yield
-	resource_yield = get_yield()
-	print("Resource [%s], yield [%s]" % [self, resource_yield])
+    resource_name = stats.name
+    item = stats.item
+    resource_strength = stats.resource_strength
+    max_resource_health = stats.max_resource_health
+    current_resource_health = max_resource_health
+    min_yield = stats.min_yield
+    max_yield = stats.max_yield
+    resource_yield = get_yield()
 
 func get_yield():
-	randomize()
-	return randi_range(min_yield, max_yield)
+    randomize()
+    return randi_range(min_yield, max_yield)

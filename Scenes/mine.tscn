@@ -17,22 +17,22 @@ _data = {
 }
 point_count = 1
 
-[sub_resource type="Resource" id="Resource_p7s3h"]
+[sub_resource type="Resource" id="Resource_ea6x0"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
-[sub_resource type="Resource" id="Resource_1wk0f"]
+[sub_resource type="Resource" id="Resource_uii0t"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
-[sub_resource type="Resource" id="Resource_nhwbw"]
+[sub_resource type="Resource" id="Resource_0ex6p"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
-[sub_resource type="Resource" id="Resource_ubier"]
+[sub_resource type="Resource" id="Resource_kr1oh"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
@@ -55,7 +55,7 @@ script = ExtResource("3_q1vds")
 position = Vector2(0, 64)
 rotation = -1.5708
 
-[node name="cart" parent="track/PathFollow2D" instance=ExtResource("2_y6spq")]
+[node name="cart" parent="track/PathFollow2D" groups=["cart"] instance=ExtResource("2_y6spq")]
 rotation = 1.5708
 inventory_data = ExtResource("5_ej4ow")
 
@@ -66,19 +66,19 @@ y_sort_enabled = true
 
 [node name="miner" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(42, 52)
-inventory_data = SubResource("Resource_p7s3h")
+inventory_data = SubResource("Resource_ea6x0")
 
 [node name="miner2" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(-32, 32)
-inventory_data = SubResource("Resource_1wk0f")
+inventory_data = SubResource("Resource_uii0t")
 
 [node name="miner3" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(8, 14)
-inventory_data = SubResource("Resource_nhwbw")
+inventory_data = SubResource("Resource_0ex6p")
 
 [node name="miner4" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(-32, 64)
-inventory_data = SubResource("Resource_ubier")
+inventory_data = SubResource("Resource_kr1oh")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
