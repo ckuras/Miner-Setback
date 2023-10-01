@@ -33,9 +33,9 @@ func mine_resource():
             slot_instance.item_data = item
             if not inventory_data.pick_up_slot_data(slot_instance):
                 print('inventory full')
-                state_machine.transition_to("Idle")
+                state_machine.transition_to("Find")
             else:
                 await mine_resource()
         else:
             pass
-            state_machine.transition_to("Idle")
+            state_machine.transition_to("Find")

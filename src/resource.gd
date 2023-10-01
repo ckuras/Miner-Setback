@@ -37,6 +37,9 @@ func _on_area_2d_body_entered(body):
 		print("in mining range ", body)
 		var miner: Miner = body
 		var current_miners: int = $Area2D.get_overlapping_bodies().size() - 1
+		# await miner.navigation_agent.navigation_finished
+		
+		await get_tree().create_timer(.5).timeout
 		miner.change_state("Mine", {"resource":self,"current_miners":current_miners})
 
 

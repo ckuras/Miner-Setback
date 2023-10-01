@@ -10,8 +10,10 @@ func enter(_msg := {}) -> void:
     navigation_agent.navigation_finished.connect(Callable(_on_navigation_finished))
     if _msg.has("cart"):
         cart = _msg.cart
-        if !find_resources():
-            state_machine.transition_to("Idle", {"target": cart})
+    else:
+        cart = get_tree().get_first_node_in_group('cart')
+    if !find_resources():
+        state_machine.transition_to("Idle", {"target": cart})
 
 
 func find_resources():
