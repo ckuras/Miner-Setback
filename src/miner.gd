@@ -12,7 +12,10 @@ signal toggle_inventory(external_inventory_owner)
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprites = $sprites
 @onready var collision = $CollisionShape2D
+@onready var body_sprites = $sprites/body/sprites
 
+func _ready():
+	initialize_sprites()
 
 func change_state(new_state: String, msg: Dictionary = {}) -> void:
 	if state_machine.state != get_node(new_state):
@@ -73,3 +76,8 @@ func _on_interact_input_event(_viewport, event, _shape_idx):
 			or event.button_index == MOUSE_BUTTON_RIGHT) \
 			and event.is_pressed():
 		inventory_interact()
+
+
+func initialize_sprites():
+	for sprite in body_sprites.get_children():
+		sprite.frame = randi_range(0, sprite.hframes - 1)

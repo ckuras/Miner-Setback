@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=30 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
@@ -21,6 +21,45 @@ slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkvap"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sj5yj"]
+load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ip3u"]
+atlas = SubResource("CompressedTexture2D_sj5yj")
+region = Rect2(0, 34, 102, 17)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ddv8q"]
+load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bootm"]
+atlas = SubResource("CompressedTexture2D_ddv8q")
+region = Rect2(0, 68, 85, 17)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18vxl"]
+load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktne8"]
+atlas = SubResource("CompressedTexture2D_18vxl")
+region = Rect2(0, 51, 884, 17)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nsg0d"]
+load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20oru"]
+atlas = SubResource("CompressedTexture2D_nsg0d")
+region = Rect2(0, 0, 816, 17)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l8ik7"]
+load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn2hd"]
+atlas = SubResource("CompressedTexture2D_l8ik7")
+region = Rect2(0, 17, 408, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfpgg"]
+atlas = ExtResource("1_27w7l")
+region = Rect2(12, 85, 34, 17)
 
 [sub_resource type="Animation" id="Animation_wuai1"]
 length = 0.001
@@ -331,10 +370,8 @@ shape = SubResource("CircleShape2D_n7ioa")
 [node name="sprites" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="body" type="Sprite2D" parent="sprites"]
+[node name="body" type="Node2D" parent="sprites"]
 light_mask = 4
-texture = ExtResource("1_27w7l")
-hframes = 2
 
 [node name="InteractArea" type="Area2D" parent="sprites/body"]
 collision_layer = 4
@@ -358,14 +395,41 @@ range_item_cull_mask = 6
 texture = ExtResource("6_j3pcw")
 texture_scale = 0.4
 
+[node name="sprites" type="Node2D" parent="sprites/body"]
+
+[node name="body" type="Sprite2D" parent="sprites/body/sprites"]
+light_mask = 4
+texture = SubResource("AtlasTexture_5ip3u")
+hframes = 6
+
+[node name="pants" type="Sprite2D" parent="sprites/body/sprites"]
+light_mask = 4
+texture = SubResource("AtlasTexture_bootm")
+hframes = 5
+
+[node name="cloths" type="Sprite2D" parent="sprites/body/sprites"]
+light_mask = 4
+texture = SubResource("AtlasTexture_ktne8")
+hframes = 52
+
+[node name="hair" type="Sprite2D" parent="sprites/body/sprites"]
+light_mask = 4
+texture = SubResource("AtlasTexture_20oru")
+hframes = 48
+
+[node name="beard" type="Sprite2D" parent="sprites/body/sprites"]
+light_mask = 4
+texture = SubResource("AtlasTexture_dn2hd")
+hframes = 24
+
 [node name="pick" type="Sprite2D" parent="sprites"]
 visible = false
 light_mask = 4
 z_index = 1
 position = Vector2(-7, 0)
-texture = ExtResource("1_27w7l")
+texture = SubResource("AtlasTexture_jfpgg")
+offset = Vector2(2, 0)
 hframes = 2
-frame = 1
 
 [node name="Shadow" type="PointLight2D" parent="sprites"]
 show_behind_parent = true
