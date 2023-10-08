@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StartingUnitStats" load_steps=4 format=3 uid="uid://dkj4rbkvtc0k7"]
+
+[ext_resource type="Script" path="res://src/units/StartingUnitStats.gd" id="1_8834u"]
+[ext_resource type="Texture2D" uid="uid://cqyqlw5irlsvl" path="res://src/item/#2 - Transparent Icons & Drop Shadow.png" id="2_s6upa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0adsq"]
+atlas = ExtResource("2_s6upa")
+region = Rect2(160, 128, 32, 32)
+
+[resource]
+script = ExtResource("1_8834u")
+type = "Miner"
+tier = 1
+texture = SubResource("AtlasTexture_0adsq")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=32 format=3 uid="uid://c8m4srbiddos6"]
 
 [ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
 [ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
 [ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
+[ext_resource type="Resource" uid="uid://dkj4rbkvtc0k7" path="res://src/units/miner.tres" id="2_suaga"]
+[ext_resource type="Script" path="res://src/units/UnitStats.gd" id="3_wnxlx"]
 [ext_resource type="Script" path="res://src/states/StateMachine.gd" id="5_8pibr"]
 [ext_resource type="Script" path="res://src/states/MinerIdle.gd" id="6_83ic7"]
 [ext_resource type="Script" path="res://src/states/CartFollow.gd" id="6_ej5w1"]
@@ -16,9 +18,6 @@
 resource_local_to_scene = true
 script = ExtResource("2_ocei1")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
-radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkvap"]
 
@@ -356,16 +355,57 @@ _data = {
 "walk": SubResource("Animation_sujpw")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
+radius = 8.0
+
 [node name="miner" type="CharacterBody2D" groups=["miner_units"]]
 collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_ebnv4")
+starting_stats = ExtResource("2_suaga")
 inventory_data = SubResource("Resource_4nt2x")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CircleShape2D_n7ioa")
+[node name="stats" type="Node" parent="."]
+script = ExtResource("3_wnxlx")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_8pibr")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
+script = ExtResource("6_83ic7")
+character = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="CartFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
+script = ExtResource("6_ej5w1")
+character = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="Mine" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
+script = ExtResource("9_asjta")
+miner = NodePath("../..")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="FindCart" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
+script = ExtResource("9_y5lu7")
+character = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="Navigation" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
+script = ExtResource("10_iiv2e")
+character = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+animation = NodePath("../../AnimationPlayer")
+
+[node name="DropOff" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
+script = ExtResource("11_oa56x")
+miner = NodePath("../..")
+animation = NodePath("../../AnimationPlayer")
 
 [node name="sprites" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -453,42 +493,8 @@ libraries = {
 "": SubResource("AnimationLibrary_08qps")
 }
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("5_8pibr")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("6_83ic7")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="CartFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("6_ej5w1")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="Mine" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
-script = ExtResource("9_asjta")
-miner = NodePath("../..")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="FindCart" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("9_y5lu7")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="Navigation" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("10_iiv2e")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="DropOff" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
-script = ExtResource("11_oa56x")
-miner = NodePath("../..")
-animation = NodePath("../../AnimationPlayer")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_n7ioa")
 
 [connection signal="input_event" from="sprites/body/InteractArea" to="." method="_on_interact_input_event"]

@@ -2,12 +2,15 @@ class_name Miner extends CharacterBody2D
 
 signal toggle_inventory(external_inventory_owner)
 
+@export var starting_stats: StartingUnitStats
+
 @export var movement_speed: float = 80
 @export var inventory_data: InventoryData
 @export var mining_strength: int = 5
 @export var mining_range: int = 100
 
 @onready var state_machine: StateMachine = $StateMachine
+@onready var stats: UnitStats = $stats
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprites = $sprites
@@ -16,6 +19,7 @@ signal toggle_inventory(external_inventory_owner)
 
 func _ready():
 	initialize_sprites()
+	stats.initialize(starting_stats)
 
 func change_state(new_state: String, msg: Dictionary = {}) -> void:
 	if state_machine.state != get_node(new_state):
