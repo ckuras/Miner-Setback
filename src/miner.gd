@@ -24,6 +24,10 @@ func change_state(new_state: String, msg: Dictionary = {}) -> void:
 func _physics_process(_delta):
 	set_sprite_direction()
 
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_R):
+		initialize_sprites()
+
 func set_sprite_direction():
 	var angle = global_position.angle_to_point(navigation_agent.target_position)
 	if abs(angle) > PI/2:

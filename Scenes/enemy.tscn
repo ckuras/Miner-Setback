@@ -1,65 +1,39 @@
-[gd_scene load_steps=30 format=3 uid="uid://c8m4srbiddos6"]
+[gd_scene load_steps=18 format=3 uid="uid://xfrjfueatqlw"]
 
-[ext_resource type="Texture2D" uid="uid://b16e3ck3qktk4" path="res://Assets/Sprites/miner.png" id="1_27w7l"]
-[ext_resource type="Script" path="res://src/miner.gd" id="1_ebnv4"]
-[ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="2_ocei1"]
-[ext_resource type="Script" path="res://src/states/StateMachine.gd" id="5_8pibr"]
-[ext_resource type="Script" path="res://src/states/MinerIdle.gd" id="6_83ic7"]
-[ext_resource type="Script" path="res://src/states/CartFollow.gd" id="6_ej5w1"]
-[ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="6_j3pcw"]
-[ext_resource type="Script" path="res://src/states/Mine.gd" id="9_asjta"]
-[ext_resource type="Script" path="res://src/states/FindCart.gd" id="9_y5lu7"]
-[ext_resource type="Script" path="res://src/states/Navigation.gd" id="10_iiv2e"]
-[ext_resource type="Script" path="res://src/states/DropOff.gd" id="11_oa56x"]
+[ext_resource type="Texture2D" uid="uid://bndd8vr41ey1w" path="res://Assets/Particles/circle_05.png" id="1_ax354"]
+[ext_resource type="Script" path="res://src/enemy.gd" id="1_ougo7"]
+[ext_resource type="Texture2D" uid="uid://ys41sa11bgil" path="res://Assets/Sprites/goblin.png" id="2_l16j1"]
+[ext_resource type="Script" path="res://src/states/Idle.gd" id="4_flvlu"]
+[ext_resource type="Script" path="res://src/states/StateMachine.gd" id="4_ghofe"]
 
-[sub_resource type="Resource" id="Resource_4nt2x"]
-resource_local_to_scene = true
-script = ExtResource("2_ocei1")
-slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_n7ioa"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7bfpo"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xkvap"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_d3fmj"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sj5yj"]
-load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft7tw"]
+atlas = ExtResource("2_l16j1")
+region = Rect2(0, 0, 34, 17)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ip3u"]
-atlas = SubResource("CompressedTexture2D_sj5yj")
-region = Rect2(0, 34, 102, 17)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldha5"]
+atlas = ExtResource("2_l16j1")
+region = Rect2(0, 34, 34, 17)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ddv8q"]
-load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpvvu"]
+atlas = ExtResource("2_l16j1")
+region = Rect2(0, 17, 136, 17)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bootm"]
-atlas = SubResource("CompressedTexture2D_ddv8q")
-region = Rect2(0, 68, 85, 17)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a1qx"]
+atlas = ExtResource("2_l16j1")
+region = Rect2(0, 0, 34, 17)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18vxl"]
-load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqwm8"]
+atlas = ExtResource("2_l16j1")
+region = Rect2(0, 0, 34, 17)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ktne8"]
-atlas = SubResource("CompressedTexture2D_18vxl")
-region = Rect2(0, 51, 884, 17)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nsg0d"]
-load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_20oru"]
-atlas = SubResource("CompressedTexture2D_nsg0d")
-region = Rect2(0, 0, 816, 17)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l8ik7"]
-load_path = "res://.godot/imported/miner.png-19cee19a4d5a6d0b3a4409defe33460d.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dn2hd"]
-atlas = SubResource("CompressedTexture2D_l8ik7")
-region = Rect2(0, 17, 408, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jfpgg"]
-atlas = ExtResource("1_27w7l")
-region = Rect2(12, 85, 34, 17)
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2lfe"]
+atlas = ExtResource("2_l16j1")
+region = Rect2(0, 51, 68, 17)
 
 [sub_resource type="Animation" id="Animation_wuai1"]
 length = 0.001
@@ -102,7 +76,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprites/pick:visible")
+tracks/3/path = NodePath("sprites/weapon:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -114,7 +88,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprites/pick:position")
+tracks/4/path = NodePath("sprites/weapon:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -126,7 +100,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprites/pick:scale")
+tracks/5/path = NodePath("sprites/weapon:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -138,7 +112,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprites/pick:rotation")
+tracks/6/path = NodePath("sprites/weapon:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -178,7 +152,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprites/pick:visible")
+tracks/0/path = NodePath("sprites/weapon:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -226,7 +200,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("sprites/pick:position")
+tracks/4/path = NodePath("sprites/weapon:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -238,7 +212,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("sprites/pick:scale")
+tracks/5/path = NodePath("sprites/weapon:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -250,7 +224,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("sprites/pick:rotation")
+tracks/6/path = NodePath("sprites/weapon:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -327,7 +301,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprites/pick:visible")
+tracks/3/path = NodePath("sprites/weapon:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -356,16 +330,11 @@ _data = {
 "walk": SubResource("Animation_sujpw")
 }
 
-[node name="miner" type="CharacterBody2D" groups=["miner_units"]]
-collision_mask = 0
-input_pickable = true
-motion_mode = 1
-script = ExtResource("1_ebnv4")
-inventory_data = SubResource("Resource_4nt2x")
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_ougo7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CircleShape2D_n7ioa")
+shape = SubResource("CircleShape2D_7bfpo")
 
 [node name="sprites" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -380,57 +349,46 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprites/body/InteractArea"]
 visible = false
-shape = SubResource("CircleShape2D_xkvap")
+shape = SubResource("CircleShape2D_d3fmj")
 debug_color = Color(0.839216, 0, 0.921569, 0.419608)
-
-[node name="PointLight2D" type="PointLight2D" parent="sprites/body"]
-energy = 0.1
-shadow_enabled = true
-shadow_item_cull_mask = 5
-texture = ExtResource("6_j3pcw")
-texture_scale = 0.4
-
-[node name="PointLight2D2" type="PointLight2D" parent="sprites/body"]
-energy = 0.1
-range_item_cull_mask = 6
-texture = ExtResource("6_j3pcw")
-texture_scale = 0.4
 
 [node name="sprites" type="Node2D" parent="sprites/body"]
 
 [node name="body" type="Sprite2D" parent="sprites/body/sprites"]
 light_mask = 4
-texture = SubResource("AtlasTexture_5ip3u")
-hframes = 6
+texture = SubResource("AtlasTexture_ft7tw")
+hframes = 2
 
 [node name="pants" type="Sprite2D" parent="sprites/body/sprites"]
 light_mask = 4
-texture = SubResource("AtlasTexture_bootm")
-hframes = 5
+texture = SubResource("AtlasTexture_ldha5")
+hframes = 2
 
 [node name="cloths" type="Sprite2D" parent="sprites/body/sprites"]
 light_mask = 4
-texture = SubResource("AtlasTexture_ktne8")
-hframes = 52
+texture = SubResource("AtlasTexture_lpvvu")
+hframes = 8
 
 [node name="hair" type="Sprite2D" parent="sprites/body/sprites"]
+visible = false
 light_mask = 4
-texture = SubResource("AtlasTexture_20oru")
+texture = SubResource("AtlasTexture_1a1qx")
 hframes = 48
 
 [node name="beard" type="Sprite2D" parent="sprites/body/sprites"]
+visible = false
 light_mask = 4
-texture = SubResource("AtlasTexture_dn2hd")
+texture = SubResource("AtlasTexture_eqwm8")
 hframes = 24
 
-[node name="pick" type="Sprite2D" parent="sprites"]
+[node name="weapon" type="Sprite2D" parent="sprites"]
 visible = false
 light_mask = 4
 z_index = 1
 position = Vector2(-7, 0)
-texture = SubResource("AtlasTexture_jfpgg")
+texture = SubResource("AtlasTexture_q2lfe")
 offset = Vector2(2, 0)
-hframes = 2
+hframes = 4
 
 [node name="Shadow" type="PointLight2D" parent="sprites"]
 show_behind_parent = true
@@ -439,7 +397,7 @@ scale = Vector2(1.2, 0.8)
 energy = 0.5
 blend_mode = 1
 range_item_cull_mask = 2
-texture = ExtResource("6_j3pcw")
+texture = ExtResource("1_ax354")
 texture_scale = 0.1
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -454,41 +412,11 @@ libraries = {
 }
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("5_8pibr")
+script = ExtResource("4_ghofe")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("6_83ic7")
+script = ExtResource("4_flvlu")
 character = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
 animation = NodePath("../../AnimationPlayer")
-
-[node name="CartFollow" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("6_ej5w1")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="Mine" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
-script = ExtResource("9_asjta")
-miner = NodePath("../..")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="FindCart" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("9_y5lu7")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="Navigation" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "navigation_agent", "animation")]
-script = ExtResource("10_iiv2e")
-character = NodePath("../..")
-navigation_agent = NodePath("../../NavigationAgent2D")
-animation = NodePath("../../AnimationPlayer")
-
-[node name="DropOff" type="Node" parent="StateMachine" node_paths=PackedStringArray("miner", "animation")]
-script = ExtResource("11_oa56x")
-miner = NodePath("../..")
-animation = NodePath("../../AnimationPlayer")
-
-[connection signal="input_event" from="sprites/body/InteractArea" to="." method="_on_interact_input_event"]
