@@ -18,22 +18,22 @@ _data = {
 }
 point_count = 1
 
-[sub_resource type="Resource" id="Resource_0l7jr"]
+[sub_resource type="Resource" id="Resource_uwkrl"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
-[sub_resource type="Resource" id="Resource_yhupt"]
+[sub_resource type="Resource" id="Resource_jkr8p"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
-[sub_resource type="Resource" id="Resource_ox01t"]
+[sub_resource type="Resource" id="Resource_mpyf3"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
 
-[sub_resource type="Resource" id="Resource_28nlo"]
+[sub_resource type="Resource" id="Resource_37ncy"]
 resource_local_to_scene = true
 script = ExtResource("7_7tjy0")
 slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null, null])
@@ -67,19 +67,19 @@ y_sort_enabled = true
 
 [node name="miner" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(42, 52)
-inventory_data = SubResource("Resource_0l7jr")
+inventory_data = SubResource("Resource_uwkrl")
 
 [node name="miner2" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(-32, 32)
-inventory_data = SubResource("Resource_yhupt")
+inventory_data = SubResource("Resource_jkr8p")
 
 [node name="miner3" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(8, 14)
-inventory_data = SubResource("Resource_ox01t")
+inventory_data = SubResource("Resource_mpyf3")
 
 [node name="miner4" parent="units" instance=ExtResource("3_v6uwb")]
 position = Vector2(-32, 64)
-inventory_data = SubResource("Resource_28nlo")
+inventory_data = SubResource("Resource_37ncy")
 
 [node name="enemies" type="Node2D" parent="."]
 z_index = 2

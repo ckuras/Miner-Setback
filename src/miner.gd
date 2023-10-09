@@ -2,6 +2,8 @@ class_name Miner extends CharacterBody2D
 
 signal toggle_inventory(external_inventory_owner)
 
+const BASE_MOVEMENT_SPEED = 80
+
 @export var starting_stats: StartingUnitStats
 
 @export var movement_speed: float = 80
@@ -17,9 +19,13 @@ signal toggle_inventory(external_inventory_owner)
 @onready var collision = $CollisionShape2D
 @onready var body_sprites = $sprites/body/sprites
 
+var mining_speed: float = 1
+
 func _ready():
 	initialize_sprites()
 	stats.initialize(starting_stats)
+	stats.stats_updated.connect(_on_stats_updated)
+	set_miner_stats(stats)
 
 func change_state(new_state: String, msg: Dictionary = {}) -> void:
 	if state_machine.state != get_node(new_state):
@@ -89,3 +95,10 @@ func _on_interact_input_event(_viewport, event, _shape_idx):
 func initialize_sprites():
 	for sprite in body_sprites.get_children():
 		sprite.frame = randi_range(0, sprite.hframes - 1)
+
+func set_miner_stats(_stats: UnitStats):
+	movement_speed = BASE_MOVEMENT_SPEED * (stats.move_speed * 0.1)
+	mining_speed = stats.haste * 0.1
+
+func _on_stats_updated(_stats: UnitStats):
+	set_miner_stats(_stats)

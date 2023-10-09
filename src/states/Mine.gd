@@ -28,7 +28,7 @@ func start_mining():
     mine_resource()
 
 func mine_resource():
-    animation.play("mine")
+    animation.play("mine", -1, miner.mining_speed)
     var mine_finished = await animation.animation_finished
     if mine_finished == "mine":
         var item = resource.gather_resource(miner)

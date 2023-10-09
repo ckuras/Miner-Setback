@@ -1,5 +1,7 @@
 class_name UnitStats extends Node
 
+signal stats_updated(stats: UnitStats)
+
 const BASE_STAT = 5
 
 var type: String
@@ -9,7 +11,7 @@ var unit_name: String
 var health: int
 var max_health: int
 
-@onready var constitution: int = BASE_STAT
+@onready var constitution: int = BASE_STAT: set = set_constitution
 @onready var move_speed: int = BASE_STAT
 @onready var attack: int = BASE_STAT
 @onready var haste: int = BASE_STAT
@@ -43,3 +45,21 @@ func distribute_bonus_stats(bonus_stats: int):
 	print("Move speed: ",move_speed)
 	print("Attack: ",attack)
 	print("Haste: ",haste)
+
+func set_constitution(value: int):
+	constitution = value
+	max_health = constitution * 10
+	health = max_health
+	emit_signal("stats_updated", self)
+
+func set_move_speed(value: int):
+	move_speed = value
+	emit_signal("stats_updated", self)
+
+func set_attack(value: int):
+	attack = value
+	emit_signal("stats_updated", self)
+
+func set_haste(value: int):
+	haste = value
+	emit_signal("stats_updated", self)
